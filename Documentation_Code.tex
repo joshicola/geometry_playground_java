@@ -1,0 +1,768 @@
+\documentclass[a4paper,10pt]{report}
+\setcounter{tocdepth}{2}
+
+%opening
+\title{}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\{There are definitely questions that will be asked throughout the documentation process.  They may or may not be implemented.\}
+\chapter{Interface}
+\section{GeoPlayground}
+  Top level user interface elements
+  Controls which geometry we are working in and what model of that geometry
+  Saving and Loading
+  contains the canvas that all graphics take place within.  I see that Section 1.1, in its entirety, could be an instructional chapter in and of itself.
+\subsection{Tabs}
+  Across the top left of the interface is a series of tabs.  These enable us to switch from one geometry to another.  
+
+\subsection{Radio Buttons}
+These buttons determine the behavior of how we interact with the canvas.  Most, with exception of the Model, are used to figure out {\it whatToDo} in the code.  This variable is in turn used extensively in many other contained objects.
+\subsubsection{Make Points}
+\begin{enumerate}
+ \item[\bf .] Make a stand alone point
+ \item[\bf X] Make an intersection point based on two circles/lines
+ \item[\bf M] Make a midpoint between two points
+\end{enumerate}
+\subsubsection{Make Lines}
+\begin{enumerate}
+ \item[\bf i] line segment
+ \item[\bf I] line
+\item[\bf T] perpendicular line (line and a point)
+\item[\bf B] angle bisector
+\end{enumerate}
+\subsubsection{Make Circles}
+\begin{enumerate}
+ \item[\bf O] Draw a circle based on two points
+\end{enumerate}
+\subsubsection{Measure}
+\begin{enumerate}
+ \item[\bf d] Distance (based on two points)
+ \item[\bf $\angle$] Angle (based on three points)
+ \item[\bf c] Circumference (based on a circle)
+ \item[\bf a] Area (based on a circle)
+\end{enumerate}
+\subsubsection{Move}
+\begin{enumerate}
+ \item[\bf $\rightleftharpoons$] Move a point or space
+ \item[\bf @] fix a point or an object
+\end{enumerate}
+\subsubsection{Display}
+\begin{enumerate}
+ \item[\bf ?] Hide object
+ \item[\bf !] Unhide all (with button)
+ \item[\bf $\S$] Show or hide label
+ \item[\bf $\emptyset$] Erase all (with button)
+\end{enumerate}
+\subsubsection{Model}
+This area of radio buttons adjust to display the available models for each geometry.
+\subsection{Buttons}
+\subsubsection{doItButton}
+This button is used to unhide or erase all, when appropriate above
+\subsubsection{Load}
+Load the objects of a geometry into an appropriately named file.  The extension is geometry specific.
+\subsubsection{Save}
+Save the objects of a geometry into an appropriately named file.  This button only becomes active when something has changes on the canvas.
+\subsection{Instruction Text}
+{\it infoLabel[]} Located at the bottom of each tabbed window. Text informing the user of what each function does is displayed here.
+
+\{Currently this is duplicated across all tabs.  If {\it whatToDo} stays the same when switching geometries it is no use to have multiple instances of {\it infoLabel}\}
+
+\chapter{Foundation Classes}
+\section{GeoPlayground}
+  Top level user interface elements
+  Controls which geometry we are working in and what model of that geometry
+  Saving and Loading
+  contains the canvas that all graphics take place within.  I see that Section 1.1, in its entirety, could be an instructional chapter in and of itself.
+
+\subsection{declarations}
+\paragraph{eastPanel, cntrPanel, makePtsPanel, makeLn1Panel, makeLn2Panel, makeCrPanel, movePanel, meas1Panel, meas2Panel, display1Panel, display2Panel : JPanel} These panels are for the layout of the graphical user interface.
+\subsubsection{tabbedPanePlane : JTabbedPane}A JTabbedPane that is used to switch between geometries. Each tab contains an instance of junkPanel, canvas, and infoLabel.
+\subsubsection{junkPanel : JPanel[]}a set of panels with the same number of elements as tabs. Each panel contains a canvas, below.
+\subsubsection{canvas : GeoCanvas[]} a set of GeoCanvases with the same number of elements as tabs 
+\subsubsection{whatToDoCBG : ButtonGroup} a ButtonGroup associated with whatToDo
+\subsubsection{makePtsButton, makeLnsButton, makeIntButton, makePrpButton, makeCrsButton, moveButton, measDistButton, measAngleButton, measAreaButton, hideButton, unhideButton, makeSegButton, labelButton, clearButton, fixButton, makeMPButton, measCircButton, makeBSButton : JRadioButton} The set of radio buttons that select whatToDo above.
+\subsubsection{modelCBG : ButtonGroup} a ButtonGroup associated with what model of a geometry we are looking at.
+\subsubsection{modelButton : JRadioButton[]} The set of radio buttons that select the model above
+\subsubsection{doItButton : Button} Depending on the whatToDo this becomes active for deleting all or showing all constructs.
+\subsubsection{infoLabel : JLabel[]}a set of JLabels with the same number of elements as tabs.  Why do we need this many?  I don't know!!!!!!!!!!
+\subsubsection{whatToDo : int} This is the integer value for whatToDoCBG above
+\subsubsection{model : int} This is the integer value for the model above
+\subsubsection{MakePoints, MakeLines, MakeInt, MakePerps, MakeCircles, Move, MeasureDist, MeasureAngle, MeasureArea, HideObject, UnhideAll, MakeSegment, LabelObject, ClearAll, FixObject, MakeMdPt, MeasureCirc, MakeBisect : int}
+Integer enumerations for whatToDo
+\subsubsection{geoModel : int[]} a set of integers indicating the default model a geometry is viewed by.
+\subsubsection{CANVASSIZE : int} Default Canvas Size
+\subsubsection{textString : String} text string used to update infoLabel
+\subsubsection{saveButton : Button} Used to save a geometry specific set of constructs to a file.
+\subsubsection{loadButton : Button} Used to load a set of geometry specific constructs from a file.
+
+\subsection{methods}
+
+ \subsubsection{init()} Initialize the GUI
+\subsubsection{setInfoTA()} Change the infoLabel based on whatToDo
+\subsubsection{itemStateChanged(ItemEvent)} This and the following manage the behaviour of various objects
+\subsubsection{stateChanged(ChangeEvent)}
+\subsubsection{actionPerformed(ActionEvent)}
+\subsubsection{createAndShowGUI()} What it says
+\subsubsection{main(String)} This is the main loop of the Java WebStart application
+\subsubsection{getHght(), getWdth()} Get the global size parameters of the application, these are used to adjust the size of the canvas and the size of the points on the canvas.
+
+\section{GeoCanvas}
+  Is the canvas that all graphical constructs are seen and interacted with.
+  Interprets all of the mouse interactions and keyboard commands associated with geometry visualization
+  Instead of replicating specific geometry specific elements that are necessary for rendering, we use a geoMetry object.
+ 
+ \subsection{declarations}
+\subsubsection{SZ : int} This is the size of the canvas.  It can change, as well as the size of the points, with the size of the GeoPlayground object.
+\subsubsection{BISECTOR, SEGMENT, PERP, LINE, CIRCLE, POINT, PTonLINE, PTonCIRC, LINEintLINE0,LINEintLINE1, CIRCintLINE0, CIRCintLINE1, CIRCintCIRC00, CIRCintCIRC01, CIRCintCIRC10, CIRCintCIRC11, MIDPT, FIXedPT, DISTANCE, AREA, CIRCUMF, ANGLE: int} These are enumerated integers denoting the type of construct that we are working with.  This copies from the same integers in GeoConstruct.
+\subsubsection{typedKey: int} The key that is typed to control the zoom
+\subsubsection{whereAtInList: int} Not used..........yet.
+\subsubsection{alreadyMoving : boolean}???????????
+\subsubsection{geometryListener : ChangeListener}????????
+\subsubsection{geometry : GeoMetry} This encapsulates the geometry specific behaviour.  All of the other behaviors are not specific to any geometry.
+\subsubsection{list : LinkedList$<$GeoConstruct$>$ } This is a list of all of the GeoConstructs that are being managed by the canvas.
+\subsubsection{clickedList : LinkedList$<$GeoConstruct$>$ } This is a list of all the clicked objects on a canvas.  Different composit objects are based on different numbers of other objects.  More on this later.
+\subsubsection{potentialClick : GeoConstruct}  An object that is clickable.  Depends on whatToDo.
+\subsubsection{firstClicked : GeoConstruct} *******Obselete*********
+\subsubsection{fixedObject : GeoConstruct} A fixed object that geometric transforms are performed around.
+\subsubsection{vector1 : double[]}??????????
+\subsubsection{vector2 : double[]}??????????
+\subsubsection{norm : double[]}??????????
+\subsubsection{binorm : double[]}??????????
+\subsubsection{dragStart : double[]}  When we move a construct or the space we want to know where we dragged it from and where it is now.
+\subsubsection{dragNow : double[]}
+ \subsection{methods}
+\subsubsection{GeoCanvas()} Constructor that initializes the canvas as multiple listeners (**obselete???? could be migrated down)
+\subsubsection{GeoCanvas(GeoMetry)} Constructor that sets the geometry 
+\subsubsection{clearFixedObject()} What it says.
+\subsubsection{paint(Graphics)} Paints the geometry specific space followed by all objects in list.  Objects in the list are in different colors depending on object type and what is a potentialClick or clickedObject.  If we are moving an object or space the new positions of the objects will be lighter.
+\subsubsection{colorSet(Graphics, GeoConstruct, boolean)} Set the color of what is to be drawn
+\subsubsection{drawAllConstructs(Graphics, boolean)} Used by paint to draw all constructs
+\subsubsection{translateAll()} Translates the space. Happens when we grab the space and move it.
+\subsubsection{getPotentialAny(double[])}  getPotential methods take a set of coordinates and returns the first object that are within range.
+\subsubsection{getPotentialComposite(double[])}
+\subsubsection{getPotentialLine(double[])}
+\subsubsection{getPotentialCircle(double[])}
+\subsubsection{getPotentialPointOrMeasure(double[])}
+\subsubsection{getPotentialPointOrInt(double[])}
+\subsubsection{getPotentialPointOrIntOrMeasure(double[])}
+\subsubsection{addChangeListener(ChangeListener)} Don't quite know why this is here.
+\subsubsection{mousePressed(MouseEvent)} Used when moving constructs or the space around.  I am not sure that we really need the switch statement here.
+\subsubsection{mouseMoved(MouseEvent)} Depending on GeoPlayground.whatToDo set potentialClick when appropriate
+\subsubsection{mouseDragged(MouseEvent)} Used for drawing the new position of constructs relative to where they were.  Again, does not seem like we need a switch statement.
+\subsubsection{mouseReleased(MouseEvent)} Used to set the current position of a construct to the new position of a construct and update all.  Again, the switch statement.
+\subsubsection{mouseEntered(MouseEvent)} Not used. But still needed to fullfill the confines of the MouseListener interface.
+\subsubsection{mouseExited(MouseEvent)} Used to detect the mouse exiting the valid space defined by the geometry.  If we drag a construct out of the valid space, reset the new position to the old position.
+\subsubsection{mouseClicked(MouseEvent)} This is the real engine of GeoCanvas.  It controls the creation of all constructs depending on GeoPlayground.whatToDo.  I have a lot of questions about how and why different things are in here.
+\subparagraph{FixObject} Select the fixed object to do transformations of the rest of the objects around
+\subparagraph{MakePoints} I am wondering, for efficiency(?) if the creation of the actual point should take place after we check to see if there is another one in its place.  Also, it seems that the last CreatePoint in the first if is needless.  We will never have a potentialClick that is a point when creating a point.
+\subparagraph{MakeMdPt} create a midpoint object.  clickedList.addFirst(potentialClick) is all that is needed here. Not the temp switcharoo.  It also seems that we want the clickedList in ID order to be able to efficiently compare when we are searching to see if it already exists.  Another way of doing this may be to add potClicked to clickedList if size<? and then sort the list based on ID. Get it in the correct order no effort. 
+When creating points would it be prudent to set both XYZ and newXYZ at the same time?
+\subparagraph{MeasureCirc} Create a Measure Circle Object.  ``Special Point''.  All of these CreateObject Routines check to see if the object already exists.  It may be prudent to create a ``AlreadyExists'' routine that goes through the ``list'' and checks for elements in clickedList.  It would clean up this part of the code a little bit.
+\subparagraph{MeasureArea} Create a Measure Area Object.  ``Special Point''. Only for circles...so far
+\subparagraph{MeasureDist} Measure Distance object.  ``Special Point'' on a hidden line between two points. clickedList.addFirst(potentialClick) is all that is needed here. Not the temp switcharoo.
+I am seeing that extending the class hierarchy would make it possible to hide some of the extra stuff in the constructors of those classes.  Stuff such as setLabelShown and setXYZ....
+\subparagraph{MeasureAngle} ``Special Point'' on an Angle Bisector object that displays the angle between three points (A,B,C) where B is the vertex.  It goes through and checks for the existence of both objects before creating them as needed.  Though the absence of the first should indicate the necessity of the latter.
+\subparagraph{MakeBisect} ``Special Line'' that is created to bisect the angle between three points.
+\subparagraph{MakeLines,MakeSegment} Lines and segements are created between two points.  We have an elaborate code to check both Lines and Segments and convert between the two of them if the object exists as the other.
+\subparagraph{MakeCircles} Circles are created from two points \{Center, Point on circle\}
+\subparagraph{MakeInt} Intersection between two composit objects (Circles or Lines inclusive)
+\subparagraph{MakePerps} Use a line and a point (in that order) to create a perpendicular line.  I am not sure of why the code is put like it is at first glance...  Must refer to deej.  It is not in the usual: gatherClicks->check AlreadyExists->create if not order.
+\subparagraph{HideObject} Hide the clicked object and its label (if shown)
+\subparagraph{LabelObject} Label the clicked object.
+\subsubsection{mouseWheelMoved(MouseWheelEvent)} Used to zoom in and out.  Not applicable to all models of all geometries.
+\subsubsection{keyTyped(KeyEvent)}
+\subsubsection{keyPressed(KeyEvent)}
+\subsubsection{keyReleased(KeyEvent)}
+
+\section{GeoMetry}
+  This class of objects relegates all Geometry specific behaviours, such as drawing on the screen, creating constructs....  This class, in particular, is an abstract class that can never be instantiated by itself
+ 
+ \subsection{declarations}
+
+ \subsubsection{methods}
+\subsubsection{getCurvature()} Deej needs to explain this more.
+\subsubsection{drawModel(Graphics, int)} Provides the text for the model choice radio buttons and draws the appropriate grid or bounding space for that model.
+\subsubsection{convertMousetoCoord(MouseEvent, int)} Converts the mouse coordinates on screen to the coordinates in the appropriate model.  I am seeing the possiblity of a model class.
+\subsubsection{mouseIsValid(double[])}  Determins if the mouse is valid in the particular model.
+\subsubsection{createPoint(int, LinkedList$<$GeoConstruct$>$ , double[])} This and the next three regulate the creation of different kinds of objects for each geometry.
+\subsubsection{createLine(int, LinkedList$<$GeoConstruct$>$ )}
+\subsubsection{createCircle(GeoConstruct, GeoConstruct)}
+\subsubsection{createIntersections(GeoConstruct, GeoConstruct, LinkedList$<$GeoConstruct$>$ )}
+\subsubsection{dotProduct(double[], double[])} Mostly consistent measurements, Hyperbolic overloads
+\subsubsection{crossProduct(double[], double[])}
+\subsubsection{acos(double)}
+\subsubsection{distance(GeoConstruct, GeoConstruct)} Geometry specific measurements
+\subsubsection{angle(GeoConstruct, GeoConstruct)}
+\subsubsection{area(GeoConstruct, boolean)}
+\subsubsection{getScale()} For zoom capable models these do what they say
+\subsubsection{setScale(double)}
+\subsubsection{extension()} Geometry specific Strings to assist in file management.
+\subsubsection{getName()} 
+\subsubsection{getFileFilter()}
+\section{GeoConstruct}
+  These are the individual graphics classes representing points, lines, and circles
+  They are individualized for each geometry and model of that geometry.  This particular class is abstract.
+ 
+ \subsection{declarations}
+\subsubsection{BISECTOR,
+SEGMENT, 
+PERP, 
+LINE, 
+CIRCLE, 
+POINT, 
+PTonLINE, 
+PTonCIRC, 
+LINEintLINE0, 
+LINEintLINE1, 
+CIRCintLINE0, 
+CIRCintLINE1, 
+CIRCintCIRC00, 
+CIRCintCIRC01, 
+CIRCintCIRC10, 
+CIRCintCIRC11, 
+MIDPT, 
+FIXedPT, 
+DISTANCE, 
+ANGLE, 
+CIRCUMF, 
+AREA : int}  The type of object that something is.  
+\subsubsection{x : double} 3D vector representing coordinates in various geometries.
+\subsubsection{y : double}
+\subsubsection{z : double}
+\subsubsection{newX : double} 3D vector representing a new coordinate in those geometry
+\subsubsection{newY : double}
+\subsubsection{newZ : double}
+\subsubsection{constList : LinkedList$<$GeoConstruct$>$ }  This is the list that this object is constructed from.  Empty if none.
+\subsubsection{type : int} The type that an object is. Changable under certain conditions.
+\subsubsection{ID : int}  The ID of the object, depending on its placement in the list.  Could be gotten directly from the list, but why bother?
+\subsubsection{shown : boolean} Is the object visible
+\subsubsection{labelShown : boolean} Is the label visible
+\subsubsection{isReal : boolean} Is the object Viewable?
+\subsubsection{isRealNew : boolean} Is the new position of the object Viewable? Viewable meaning is its position able to be calculated and viewed in the space provided.
+ \subsection{methods}
+\subsubsection{GeoConstruct()} Really not used... ever.  Could be gotten rid of.
+\subsubsection{GeoConstruct(int, double[])}  These could be utilized more in subclasses.
+\subsubsection{GeoConstruct(int, double[], double[])}
+\subsubsection{GeoConstruct(int, GeoConstruct, GeoConstruct)}
+\subsubsection{GeoConstruct(int, double[], GeoConstruct)}
+\subsubsection{getType()} What they say
+\subsubsection{getID()}
+\subsubsection{getShown()}
+\subsubsection{getLabelShown()}
+\subsubsection{getX()}
+\subsubsection{getNewX()}
+\subsubsection{getY()}
+\subsubsection{getNewY()}
+\subsubsection{getZ()}
+\subsubsection{getNewZ()}
+\subsubsection{getValid()} Hey it's better than getReal!!!
+\subsubsection{getValidNew()}
+\subsubsection{getSize()} Returns the size of the constList.
+\subsubsection{get(int)} Gets the i'th entry in the list. If i>size, return null.
+\subsubsection{getXYZ(double[])} What they Say.
+\subsubsection{getNewXYZ(double[])}
+\subsubsection{setID(int)}
+\subsubsection{setType(int)}
+\subsubsection{setShown(boolean)}
+\subsubsection{setValid(boolean)}
+\subsubsection{setValidNew(boolean)}
+\subsubsection{setLabelShown(boolean)}
+\subsubsection{setXYZ(double[])}
+\subsubsection{setXYZ(double[], double[])} I don't know why we have this?
+\subsubsection{setNewXYZ(double[])}
+\subsubsection{setNewXYZ(double[], double[])} Or this
+\subsubsection{draw(Graphics, int, boolean)} Draw the specific object
+\subsubsection{mouseIsOver(double[], int)} Take a coordinate and the size of the space and indicate whether the mouse is over the object.
+\subsubsection{update()} update the coordinates of the object
+\subsubsection{translate(double[], double[])}  Need to ask Deej
+\subsubsection{transform(GeoConstruct, double[], double[])} Need to ask Deej
+\subsubsection{getScale()}  I am going to have to review how all of these work.
+\subsubsection{setScale(double)}
+\subsubsection{resetScale()}
+\chapter{Utility Classes}
+  These are classes that aid the functionality of the program as a whole, 
+  \section{MathEqns} Deej is going to have to document these
+ \subsection{methods}
+\subsubsection{min(double, double)}
+\subsubsection{max(double, double)}
+\subsubsection{round(double)}
+\subsubsection{chop(double)}
+\subsubsection{chop(double, int)}
+\subsubsection{norm(double[])}
+\subsubsection{norm(double[], double[])}
+\subsubsection{crossProduct(double[], double[], double[])}
+\subsubsection{hypCrossProduct(double[], double[], double[])}
+\subsubsection{normalize(double[])}
+\subsubsection{hypNormalize(double[])}
+\subsubsection{scalarProduct(double, double[])}
+\subsubsection{addVec(double[], double[])}
+\subsubsection{subVec(double[], double[])}
+\subsubsection{dotProduct(double[], double[])}
+\subsubsection{hypProduct(double[], double[])}
+\subsubsection{rotate(double, double, double, double, ProjectiveConstruct)}
+\subsubsection{rotate(double, double, double, double, SphericalConstruct)}
+\subsubsection{transform(GeoConstruct, ProjectiveConstruct, double[], double[])}
+\subsubsection{transform(GeoConstruct, SphericalConstruct, double[], double[])}
+\subsubsection{transform(GeoConstruct, ToroidalConstruct, double[], double[])}
+\subsubsection{transform(GeoConstruct, EuclideanConstruct, double[], double[])}
+\subsubsection{transform(GeoConstruct, HyperConstruct, double[], double[])}
+\subsubsection{hypPerp(double[], double[], double[])}
+\subsubsection{hypLineIntLine(double[], double[], double[])}
+\subsubsection{hypTranslate(double[], double[], double[])}
+\subsubsection{sphTranslate(double[], double[], double[])}
+\subsubsection{makeStandard(double[])}
+\subsubsection{acosh(double)}
+\subsubsection{eucAngle(double[], double[], double[])}
+\subsubsection{hypAngle(double[], double[], double[])}
+\subsubsection{sphAngle(double[], double[], double[])}
+  \section{CircleEqns}Deej is going to have to document these
+  \subsection{methods}
+\subsubsection{calculateCL(double[], double[], double[], double[], boolean)}
+\subsubsection{calculateCC0(double[], double[], double[], double[], double[], boolean)}
+\subsubsection{calculateCC1(double[], double[], double[], double[], double[], boolean)}
+\subsubsection{calculateHypCL(double[], double[], double[], double[], boolean)}
+\subsubsection{calculateHypCC(double[], double[], double[], double[], double[], boolean)}
+\subsubsection{calculateEucCL(double[], double[], double[], double[], double[], boolean)}
+\subsubsection{calculateEucCC(double[], double[], double[], double[], double[], boolean)}
+\section{SaveLoad}
+\subsection{methods}
+\subsubsection{save(LinkedList $<$GeoConstruct$>$, GeoCanvas)} Saves the linkedList into a geometry specific file, using an extension, with the name of the geometry in the first line.  The rest of the file consist of a line for each object in the list\\
+{\verb !KEY:ID,Type,<x,y,z>,{parent-1,parent-2,...},isShown,hasLabel,isReal }\\
+It tries to save the file with a geometry specific extension.
+\subsubsection{load(LinkedList $<$GeoConstruct$>$, GeoCanvas)} This procedure parses a geometry specific file that we select into the linkedList.  It has a couple of measures to make sure that we are loading the file into the appropriate geometry (file extension and name parameter in the first line).  Each line is parsed and the appropriate construct references are made (what construct depends on others).***********I have been thinking about asking the user if they would like to switch to the appropriate geometry if the wrong one is chosen************
+\subsubsection{processGeometry(String, String)} Is used to make sure the geometry name matches with the geometry name in the first line of the file.
+\subsubsection{processLine(String, LinkedList $<$GeoConstruct$>$ , GeoMetry)} Uses a Scanner object to parse through the line and set the appropriate attributes of each construct.
+\subsubsection{StringToType(String)} Used to convert between the string and integer representations of the types of constructs.
+\subsubsection{TypeToString(int)}
+
+\chapter{Derived Classes}
+\section{EuclideanGeometry extends GeoMetry} This is the specific class for Euclidean Geometry
+\subsection{declarations}
+\subsubsection{}
+\subsection{methods}
+\subsection{getCurvature()} 
+\subsubsection{drawModel(Graphics, int)} 
+\subsubsection{convertMousetoCoord(MouseEvent, int)} 
+\subsubsection{mouseIsValid(double[])} 
+\subsubsection{createPoint(int, LinkedList$<$GeoConstruct$>$, double[])} 
+\subsubsection{createLine(int, LinkedList$<$GeoConstruct$>$)} 
+\subsubsection{createCircle(GeoConstruct, GeoConstruct)} 
+\subsubsection{createIntersections(GeoConstruct, GeoConstruct, LinkedList$<$GeoConstruct$>$)} 
+\subsubsection{distance(GeoConstruct, GeoConstruct)} 
+\subsubsection{angle(GeoConstruct, GeoConstruct)} 
+\subsubsection{area(GeoConstruct, boolean)} 
+\subsubsection{getScale()} 
+\subsubsection{setScale(double)} 
+\subsubsection{extension()} 
+\subsubsection{getName()}  
+\subsubsection{getFileFilter()} 
+\section{ToroidalGeometry extends GeoMetry} This is the specific class for Euclidean Geometry
+\subsection{declarations}
+\subsubsection{}
+\subsection{methods}
+\subsubsection{getCurvature()} 
+\subsubsection{drawModel(Graphics, int)} 
+\subsubsection{convertMousetoCoord(MouseEvent, int)} 
+\subsubsection{mouseIsValid(double[])} 
+\subsubsection{createPoint(int, LinkedList$<$GeoConstruct$>$, double[])} 
+\subsubsection{createLine(int, LinkedList$<$GeoConstruct$>$)} 
+\subsubsection{createCircle(GeoConstruct, GeoConstruct)} 
+\subsubsection{createIntersections(GeoConstruct, GeoConstruct, LinkedList$<$GeoConstruct$>$)} 
+\subsubsection{distance(GeoConstruct, GeoConstruct)} 
+\subsubsection{angle(GeoConstruct, GeoConstruct)} 
+\subsubsection{area(GeoConstruct, boolean)} 
+\subsubsection{getScale()} 
+\subsubsection{setScale(double)} 
+\subsubsection{extension()} 
+\subsubsection{getName()} 
+\subsubsection{getFileFilter()}
+\section{ProjectiveGeometry extends GeoMetry} This is the specific class for Euclidean Geometry
+\subsection{declarations}
+\subsubsection{}
+\subsection{methods}
+\subsubsection{getCurvature()}
+\subsubsection{drawModel(Graphics, int)}
+\subsubsection{convertMousetoCoord(MouseEvent, int)}
+\subsubsection{mouseIsValid(double[])}
+\subsubsection{createPoint(int, LinkedList$<$GeoConstruct$>$, double[])}
+\subsubsection{createLine(int, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{createCircle(GeoConstruct, GeoConstruct)}
+\subsubsection{createIntersections(GeoConstruct, GeoConstruct, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{distance(GeoConstruct, GeoConstruct)}
+\subsubsection{angle(GeoConstruct, GeoConstruct)}
+\subsubsection{area(GeoConstruct, boolean)}
+\subsubsection{getScale()}
+\subsubsection{setScale(double)}
+\subsubsection{extension()}
+\subsubsection{getName()}
+\subsubsection{getFileFilter()}
+\subsubsection{SphericalGeometry extends GeoMetry} This is the specific class for Euclidean Geometry
+\subsubsection{getCurvature()}
+\subsubsection{drawModel(Graphics, int)}
+\subsubsection{convertMousetoCoord(MouseEvent, int)}
+\subsubsection{mouseIsValid(double[])}
+\subsubsection{createPoint(int, LinkedList$<$GeoConstruct$>$, double[])}
+\subsubsection{createLine(int, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{createCircle(GeoConstruct, GeoConstruct)}
+\subsubsection{createIntersections(GeoConstruct, GeoConstruct, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{distance(GeoConstruct, GeoConstruct)}
+\subsubsection{angle(GeoConstruct, GeoConstruct)}
+\subsubsection{area(GeoConstruct, boolean)}
+\subsubsection{getScale()}
+\subsubsection{setScale(double)}
+\subsubsection{extension()}
+\subsubsection{getName()}
+\subsubsection{getFileFilter()}
+\section{HyperbolicGeometry extends GeoMetry} This is the specific class for Euclidean Geometry
+\subsection{declarations}
+\subsubsection{}
+\subsection{methods}
+\subsubsection{getCurvature()}
+\subsubsection{drawModel(Graphics, int)}
+\subsubsection{convertMousetoCoord(MouseEvent, int)}
+\subsubsection{mouseIsValid(double[])}
+\subsubsection{createPoint(int, LinkedList$<$GeoConstruct$>$, double[])}
+\subsubsection{createLine(int, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{createCircle(GeoConstruct, GeoConstruct)}
+\subsubsection{createIntersections(GeoConstruct, GeoConstruct, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{dotProduct(double[], double[])}
+\subsubsection{acos(double)}
+\subsubsection{distance(GeoConstruct, GeoConstruct)}
+\subsubsection{angle(GeoConstruct, GeoConstruct)}
+\subsubsection{area(GeoConstruct, boolean)}
+\subsubsection{getScale()}
+\subsubsection{setScale(double)}
+\subsubsection{extension()}
+\subsubsection{getName()}
+\subsubsection{getFileFilter()}
+\section{EuclideanConstruct extends GeoConstruct} This is the specific class for Euclidean Geometry
+\subsection{declarations}
+\subsubsection{scale : double}
+\subsubsection{scaleLimit : int}
+\subsection{methods}
+\subsubsection{EuclideanConstruct()}
+\subsubsection{EuclideanConstruct(int, double[])}
+\subsubsection{EuclideanConstruct(int, double[], double[])}
+\subsubsection{EuclideanConstruct(int, EuclideanConstruct, EuclideanConstruct)}
+\subsubsection{EuclideanConstruct(int, double[], EuclideanConstruct)}
+\subsubsection{EuclideanConstruct(int, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{EuclideanConstruct(int, LinkedList$<$GeoConstruct$>$, double[])}
+\subsubsection{intersect(int, EuclideanConstruct)}
+\subsubsection{setXYZ(double[])}
+\subsubsection{setXYZ(double[], double[])}
+\subsubsection{setNewXYZ(double[])}
+\subsubsection{setNewXYZ(double[], double[])}
+\subsubsection{translate(double[], double[])}
+\subsubsection{getScale()}
+\subsubsection{setScale(double)}
+\subsubsection{resetScale()}
+\subsubsection{rescale(double[])}
+\subsubsection{unscale(double[])}
+\subsubsection{transform(GeoConstruct, double[], double[])}
+\section{EuclideanPoint extends EuclideanConstruct} This is the specific class for Euclidean Geometry
+\subsection{declarations}
+\subsubsection{}
+\subsection{methods}
+\subsubsection{EuclideanPoint(int, double[])}
+\subsubsection{EuclideanPoint(int, double[], double[])}
+\subsubsection{EuclideanPoint(int, double[], EuclideanConstruct)}
+\subsubsection{EuclideanPoint(int, EuclideanConstruct, EuclideanConstruct)}
+\subsubsection{EuclideanPoint(int, LinkedList$<$GeoConstruct$>$, double[])}
+\subsubsection{intersect(int, EuclideanConstruct)}
+\subsubsection{draw(Graphics, int, boolean)}
+\subsubsection{mouseIsOver(double[], int)}
+\subsubsection{update()}
+\subsection{EuclideanLine extends EuclideanConstruct} This is the specific class for Euclidean Geometry
+\subsection{declarations}
+\subsubsection{vec1 : double[]}
+\subsubsection{vec2 : double[]}
+\subsubsection{norm : double[]}
+\subsubsection{binorm : double[]}
+\subsection{methods}
+\subsubsection{EuclideanLine(int, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{intersect(int, EuclideanConstruct)}
+\subsubsection{intersect(int, EuclideanLine)}
+\subsubsection{intersect(int, EuclideanCircle)}
+\subsubsection{draw(Graphics, int, boolean)}
+\subsubsection{mouseIsOver(double[], int)}
+\subsubsection{update()}
+\section{EuclideanCircle extends EuclideanConstruct} This is the specific class for Euclidean Geometry
+\subsection{declarations}
+\subsubsection{}
+\subsection{methods}
+\subsubsection{EuclideanCircle(int, EuclideanConstruct, EuclideanConstruct)}
+\subsubsection{intersect(int, EuclideanConstruct)}
+\subsubsection{intersect(int, EuclideanLine)}
+\subsubsection{intersect(int, EuclideanCircle)}
+\subsubsection{draw(Graphics, int, boolean)}
+\subsubsection{mouseIsOver(double[], int)}
+\subsubsection{update()}
+\subsubsection{getCLxyz(EuclideanPoint, EuclideanConstruct, int)}
+\subsubsection{getNewCLxyz(EuclideanPoint, EuclideanConstruct, int)}
+\subsubsection{getCCxyz(EuclideanPoint, EuclideanConstruct, int)}
+\subsubsection{getNewCCxyz(EuclideanPoint, EuclideanConstruct, int)}
+\section{ToroidalConstruct extends GeoConstruct}
+\subsection{declarations}
+\subsubsection{scale : double}
+\subsubsection{scaleLimit : int}
+\subsection{methods}
+\subsubsection{ToroidalConstruct()}
+\subsubsection{ToroidalConstruct(int, double[])}
+\subsubsection{ToroidalConstruct(int, double[], double[])}
+\subsubsection{ToroidalConstruct(int, ToroidalConstruct, ToroidalConstruct)}
+\subsubsection{ToroidalConstruct(int, double[], ToroidalConstruct)}
+\subsubsection{ToroidalConstruct(int, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{ToroidalConstruct(int, LinkedList$<$GeoConstruct$>$, double[])}
+\subsubsection{intersect(int, ToroidalConstruct)}
+\subsubsection{setXYZ(double[])}
+\subsubsection{setXYZ(double[], double[])}
+\subsubsection{setNewXYZ(double[])}
+\subsubsection{setNewXYZ(double[], double[])}
+\subsubsection{translate(double[], double[])}
+\subsubsection{getScale()}
+\subsubsection{setScale(double)}
+\subsubsection{resetScale()}
+\subsubsection{rescale(double[])}
+\subsubsection{unscale(double[])}
+\subsubsection{transform(GeoConstruct, double[], double[])}
+\section{ToroidalPoint extends ToroidalConstruct} This
+\subsection{declarations}
+\subsubsection{}
+\subsection{methods}
+\subsubsection{ToroidalPoint(int, double[])}
+\subsubsection{ToroidalPoint(int, double[], double[])}
+\subsubsection{ToroidalPoint(int, double[], ToroidalConstruct)}
+\subsubsection{ToroidalPoint(int, ToroidalConstruct, ToroidalConstruct)}
+\subsubsection{ToroidalPoint(int, LinkedList$<$GeoConstruct$>$, double[])}
+\subsubsection{intersect(int, ToroidalConstruct)}
+\subsubsection{draw(Graphics, int, boolean)}
+\subsubsection{mouseIsOver(double[], int)}
+\subsubsection{update()}
+\section{ToroidalLine extends ToroidalConstruct} This
+\subsection{declarations}
+\subsubsection{vec1 : double[]}
+\subsubsection{vec2 : double[]}
+\subsubsection{norm : double[]}
+\subsubsection{binorm : double[]}
+\subsection{methods}
+\subsubsection{ToroidalLine(int, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{intersect(int, ToroidalConstruct)}
+\subsubsection{intersect(int, ToroidalLine)}
+\subsubsection{intersect(int, ToroidalCircle)}
+\subsubsection{draw(Graphics, int, boolean)}
+\subsubsection{mouseIsOver(double[], int)}
+\subsubsection{update()}
+\section{ToroidalCircle extends ToroidalConstruct} This
+\subsubsection{declarations}
+\subsubsection{}
+\subsection{methods}
+\subsubsection{ToroidalCircle(int, ToroidalConstruct, ToroidalConstruct)}
+\subsubsection{intersect(int, ToroidalConstruct)}
+\subsubsection{intersect(int, ToroidalLine)}
+\subsubsection{intersect(int, ToroidalCircle)}
+\subsubsection{draw(Graphics, int, boolean)}
+\subsubsection{mouseIsOver(double[], int)}
+\subsubsection{update()}
+\subsubsection{getCLxyz(ToroidalPoint, ToroidalConstruct, int)}
+\subsubsection{getNewCLxyz(ToroidalPoint, ToroidalConstruct, int)}
+\subsubsection{getCCxyz(ToroidalPoint, ToroidalConstruct, int)}
+\subsubsection{getNewCCxyz(ToroidalPoint, ToroidalConstruct, int)}
+\section{SphericalConstruct extends GeoConstruct} This
+\subsection{declarations}
+\subsubsection{}
+\subsection{methods}
+\subsubsection{SphericalConstruct()}
+\subsubsection{SphericalConstruct(int, double[])}
+\subsubsection{SphericalConstruct(int, double[], double[])}
+\subsubsection{SphericalConstruct(int, SphericalConstruct, SphericalConstruct)}
+\subsubsection{SphericalConstruct(int, double[], SphericalConstruct)}
+\subsubsection{SphericalConstruct(int, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{SphericalConstruct(int, LinkedList$<$GeoConstruct$>$, double[])}
+\subsubsection{intersect(int, SphericalConstruct)}
+\subsubsection{setXYZ(double[])}
+\subsubsection{setXYZ(double[], double[])}
+\subsubsection{setNewXYZ(double[])}
+\subsubsection{setNewXYZ(double[], double[])}
+\subsubsection{translate(double[], double[])}
+\subsubsection{transform(GeoConstruct, double[], double[])}
+\section{SphericalPoint extends SphericalConstruct} This
+\subsection{declarations}
+\subsubsection{}
+\subsection{methods}
+\subsubsection{SphericalPoint(int, double[])}
+\subsubsection{SphericalPoint(int, double[], double[])}
+\subsubsection{SphericalPoint(int, double[], SphericalConstruct)}
+\subsubsection{SphericalPoint(int, SphericalConstruct, SphericalConstruct)}
+\subsubsection{SphericalPoint(int, LinkedList$<$GeoConstruct$>$, double[])}
+\subsubsection{intersect(int, SphericalConstruct)}
+\subsubsection{draw(Graphics, int, boolean)}
+\subsubsection{mouseIsOver(double[], int)}
+\subsubsection{update()}
+\section{SphericalLine extends SphericalConstruct} This
+\subsection{declarations}
+\subsubsection{vec1 : double[]}
+\subsubsection{vec2 : double[]}
+\subsubsection{norm : double[]}
+\subsubsection{binorm : double[]}
+\subsection{methods}
+\subsubsection{SphericalLine(int, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{intersect(int, SphericalConstruct)}
+\subsubsection{intersect(int, SphericalLine)}
+\subsubsection{intersect(int, SphericalCircle)}
+\subsubsection{draw(Graphics, int, boolean)}
+\subsubsection{mouseIsOver(double[], int)}
+\subsubsection{update()}
+\section{SphericalCircle extends SphericalConstruct} This
+\subsection{declarations}
+\subsubsection{vec1 : double[]} 
+\subsubsection{vec2 : double[]}
+\subsubsection{norm : double[]}
+\subsubsection{binorm : double[]}
+\subsection{methods}
+\subsubsection{SphericalCircle(int, SphericalConstruct, SphericalConstruct)}
+\subsubsection{intersect(int, SphericalConstruct)}
+\subsubsection{intersect(int, SphericalLine)}
+\subsubsection{intersect(int, SphericalCircle)}
+\subsubsection{draw(Graphics, int, boolean)}
+\subsubsection{mouseIsOver(double[], int)}
+\subsubsection{update()}
+\subsubsection{getCLxyz(SphericalPoint, SphericalConstruct, int)}
+\subsubsection{getNewCLxyz(SphericalPoint, SphericalConstruct, int)}
+\subsubsection{getCCxyz(SphericalPoint, SphericalConstruct, int)}
+\subsubsection{getNewCCxyz(SphericalPoint, SphericalConstruct, int)}
+\section{ProjectiveConstruct extends GeoConstruct} This
+\subsection{declarations}
+\subsubsection{}
+\subsection{methods}
+\subsubsection{ProjectiveConstruct()}
+\subsubsection{ProjectiveConstruct(int, double[])}
+\subsubsection{ProjectiveConstruct(int, double[], double[])}
+\subsubsection{ProjectiveConstruct(int, ProjectiveConstruct, ProjectiveConstruct)}
+\subsubsection{ProjectiveConstruct(int, double[], ProjectiveConstruct)}
+\subsubsection{ProjectiveConstruct(int, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{ProjectiveConstruct(int, LinkedList$<$GeoConstruct$>$, double[])}
+\subsubsection{intersect(int, ProjectiveConstruct)}
+\subsubsection{setXYZ(double[])}
+\subsubsection{setXYZ(double[], double[])}
+\subsubsection{setNewXYZ(double[])}
+\subsubsection{setNewXYZ(double[], double[])}
+\subsubsection{translate(double[], double[])}
+\subsubsection{transform(GeoConstruct, double[], double[])}
+\section{ProjectivePoint extends ProjectiveConstruct} This
+\subsection{declarations}
+\subsubsection{}
+\subsection{methods}
+\subsubsection{ProjectivePoint(int, double[])}
+\subsubsection{ProjectivePoint(int, double[], double[])}
+\subsubsection{ProjectivePoint(int, double[], ProjectiveConstruct)}
+\subsubsection{ProjectivePoint(int, ProjectiveConstruct, ProjectiveConstruct)}
+\subsubsection{ProjectivePoint(int, LinkedList$<$GeoConstruct$>$, double[])}
+\subsubsection{intersect(int, GeoConstruct)}
+\subsubsection{intersect(int, ProjectiveConstruct)}
+\subsubsection{draw(Graphics, int, boolean)}
+\subsubsection{mouseIsOver(double[], int)}
+\subsubsection{update()}
+\section{ProjectiveLine extends ProjectiveConstruct} This
+\subsection{declarations}
+\subsubsection{vec1 : double[]}
+\subsubsection{vec2 : double[]}
+\subsubsection{norm : double[]}
+\subsubsection{binorm : double[]}
+\subsection{methods}
+\subsubsection{ProjectiveLine(int, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{intersect(int, ProjectiveConstruct)}
+\subsubsection{intersect(int, ProjectiveLine)}
+\subsubsection{intersect(int, ProjectiveCircle)}
+\subsubsection{draw(Graphics, int, boolean)}
+\subsubsection{mouseIsOver(double[], int)}
+\subsubsection{update()}
+\section{ProjectiveCircle extends ProjectiveConstruct} This
+\subsection{declarations}
+\subsubsection{vec1 : double[]}
+\subsubsection{vec2 : double[]}
+\subsubsection{norm : double[]}
+\subsubsection{binorm : double[]}
+\subsection{methods}
+\subsubsection{ProjectiveCircle(int, ProjectiveConstruct, ProjectiveConstruct)}
+\subsubsection{intersect(int, ProjectiveConstruct)}
+\subsubsection{intersect(int, ProjectiveLine)}
+\subsubsection{intersect(int, ProjectiveCircle)}
+\subsubsection{draw(Graphics, int, boolean)}
+\subsubsection{mouseIsOver(double[], int)}
+\subsubsection{update()}
+\subsubsection{getCLxyz(ProjectivePoint, ProjectiveConstruct, int)}
+\subsubsection{getNewCLxyz(ProjectivePoint, ProjectiveConstruct, int)}
+\subsubsection{getCCxyz(ProjectivePoint, ProjectiveConstruct, int)}
+\subsubsection{getNewCCxyz(ProjectivePoint, ProjectiveConstruct, int)}
+\section{HyperConstruct extends GeoConstruct} This
+\subsection{declarations}
+\subsubsection{scale : double}
+\subsubsection{scaleLimit : int}
+\subsection{methods}
+\subsubsection{HyperConstruct()}
+\subsubsection{HyperConstruct(int, double[])}
+\subsubsection{HyperConstruct(int, double[], double[])}
+\subsubsection{HyperConstruct(int, HyperConstruct, HyperConstruct)}
+\subsubsection{HyperConstruct(int, double[], HyperConstruct)}
+\subsubsection{HyperConstruct(int, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{HyperConstruct(int, LinkedList$<$GeoConstruct$>$, double[])}
+\subsubsection{intersect(int, HyperConstruct)}
+\subsubsection{setXYZ(double[])}
+\subsubsection{setXYZ(double[], double[])}
+\subsubsection{setNewXYZ(double[])}
+\subsubsection{setNewXYZ(double[], double[])}
+\subsubsection{translate(double[], double[])}
+\subsubsection{getScale()}
+\subsubsection{setScale(double)}
+\subsubsection{resetScale()}
+\subsubsection{rescale(double[])}
+\subsubsection{unscale(double[])}
+\subsubsection{transform(GeoConstruct, double[], double[])}
+\section{HyperPoint extends HyperConstruct} This
+\subsection{declarations}
+\subsubsection{}
+\subsection{methods}
+\subsubsection{HyperPoint(int, double[])}
+\subsubsection{HyperPoint(int, double[], double[])}
+\subsubsection{HyperPoint(int, double[], HyperConstruct)}
+\subsubsection{HyperPoint(int, HyperConstruct, HyperConstruct)}
+\subsubsection{HyperPoint(int, LinkedList$<$GeoConstruct$>$, double[])}
+\subsubsection{intersect(int, HyperConstruct)}
+\subsubsection{draw(Graphics, int, boolean)}
+\subsubsection{mouseIsOver(double[], int)}
+\subsubsection{update()}
+\section{HyperLine  extends HyperConstruct} This
+\subsection{declarations}
+\subsubsection{vec1 : double[]}
+\subsubsection{u2 : double[]}
+\subsubsection{norm : double[]}
+\subsubsection{binorm : double[]}
+\subsection{methods}
+\subsubsection{HyperLine(int, LinkedList$<$GeoConstruct$>$)}
+\subsubsection{intersect(int, HyperConstruct)}
+\subsubsection{intersect(int, HyperLine)}
+\subsubsection{intersect(int, HyperCircle)}
+\subsubsection{draw(Graphics, int, boolean)}
+\subsubsection{mouseIsOver(double[], int)}
+\subsubsection{update()}
+\section{HyperCircle extends HyperConstruct} This
+\subsection{declarations}
+\subsubsection{}
+\subsection{methods}
+\subsubsection{HyperCircle(int, HyperConstruct, HyperConstruct)}
+\subsubsection{intersect(int, HyperConstruct)}
+\subsubsection{intersect(int, HyperLine)}
+\subsubsection{intersect(int, HyperCircle)}
+\subsubsection{draw(Graphics, int, boolean)}
+\subsubsection{mouseIsOver(double[], int)}
+\subsubsection{update()}
+\subsubsection{getCLxyz(HyperPoint, HyperConstruct, int)}
+\subsubsection{getNewCLxyz(HyperPoint, HyperConstruct, int)}
+\subsubsection{getCCxyz(HyperPoint, HyperConstruct, int)}
+\subsubsection{getNewCCxyz(HyperPoint, HyperConstruct, int)}
+\end{document}

@@ -1,0 +1,839 @@
+08_04_28_19:00
+
+Done:
+1. Did some consolidating so that we could put all three into a single directory, and so that MathJunk and CircleJunk can be recycled.
+2. Added a line segment function.
+3. Made a few changes in mouseClicked() in *Playground.java so that user can make a hidden object re-visible by, essentially, recreating it, and can also convert a line to a segment and vice versa.
+4. Created SphericalPlayground and HyperPlayground.
+
+To Do:
+-1. Create Save/Load routines
+-2. Un-bug (un-feature?) that points on segments can appear off segment?
+-3. Function "rotate" in MathJunk.java will need two versions (one for Projective, one for Hyperbolic), but it currently has three...Projective and Spherical should be able to be collapsed. (not quite done)
+-4. Hyperbolic Circles
+
+08_05_03_12:20
+
+Done:
+1. Created hypTranslate function in MathJunk that essentially does the hyperbolic translation from the point (ds[0],ds[1],ds[2]) to (0,0,1).  To go backwards, we simply send the point (-ds[0],-ds[1],ds[2]) instead of ds.
+2. Created the hyperbolic circle drawing algorithm.
+3. Created the intersect routines in CircleJunk that find points of intersections between circles & lines or circles & circles in hyperbolic space.
+
+To Do:
+-1. Save/Load Routines
+-2. Should we have a set of radio buttons (in *Playground) across the top on the right that let us choose the model?  It seems that the *Playground.java's are all identical, the *Canvas.java's are isomorphic, and the *Construct.java's are homomorphic, and MathJunk and CircleJunk already contain routines for all three.(done!)
+-3. Inverse Plane?
+
+08_05_09_20:20 (JJ)
+Against my better judgement (I am indulging myself... and I have a lot of work to do) I have completed a couple of things on the integration of the playgrounds:
+
+1) I have created a GeometryPlaneCanvas that is the abstract GrandDaddy of all of the other Canvases.  In this Canvas I have been able to "superclass" (yes, I verbed it) the following attributes and functions:
+  protected final int SZ= GeometryPlayground.CANVASSIZE/2;
+  public static final int SEGMENT=-3,PERP=-2,LINE=-1,     // types of lines
+  CIRCLE=0,             // circle
+  POINT=1,PTonLINE=2,PTonCIRC=3,    // points that can be moved
+  LINEintLINE0=4,LINEintLINE1=5,            // points that can't be moved
+  CIRCintLINE0=6,CIRCintLINE1=7,    // points that can't be moved
+  CIRCintCIRC00=8,CIRCintCIRC01=9,    // points that can't be moved
+  CIRCintCIRC10=10,CIRCintCIRC11=11;    // points that can't be moved
+  // note that all lines have negative indices and all points have positive indices.
+  protected ChangeListener modelListener; 
+  public LinkedList<GeoConstruct>list
+  = new LinkedList<GeoConstruct>();
+  protected GeoConstruct potentialClick=null, firstClicked=null;
+  protected double[] vector1=  {0,0,0}, vector2={0,0,0},
+  norm=     {0,0,0},  binorm={0,0,0},
+  dragStart={0,0,0}, dragNow={0,0,0};
+
+  public void drawAllConstructs(Graphics g, boolean isNew)
+  public void getPotentialAny(double[] v1)
+  public void getPotentialComposite(double[] v1)
+  public void getPotentialLine(double[] v1)
+  public void getPotentialCircle(double[] v1)
+  public void getPotentialPoint(double[] v1)
+  public void getPotentialPointOrInt(double[] v1) 
+  public void addChangeListener(ChangeListener e)
+  public void mouseEntered(MouseEvent arg0)
+  public void mouseExited(MouseEvent arg0)
+
+ 	public abstract void paint(Graphics g);  
+  public abstract void mouseClicked(MouseEvent arg0)
+  
+TODO: some of the mouse* functions may be able to be partially superclassed, but mostly they need to stay where they are... as well as with the paint function.
+        superclass the RotateAll method and change it to the TranslateAll method.  To be used with the *Construct.translate() method.
+  
+2) I have created the greatgranddaddy of the Constructs (GeoConstruct).  It is an abstract class that has the following superclassed attributes and methods:
+
+  public static final int SEGMENT=-3,PERP=-2,LINE=-1,     // types of lines
+  CIRCLE=0,             // circle
+  POINT=1,PTonLINE=2,PTonCIRC=3,    // points that can be moved
+  LINEintLINE0=4,LINEintLINE1=5,            // points that can't be moved
+  CIRCintLINE0=6,CIRCintLINE1=7,    // points that can't be moved
+  CIRCintCIRC00=8,CIRCintCIRC01=9,    // points that can't be moved
+  CIRCintCIRC10=10,CIRCintCIRC11=11;    // points that can't be moved
+  // note that all lines have negative indices and all points have positive indices.
+  protected double x=0,y=0,z=0,newX=0,newY=0,newZ=0;
+  protected GeoConstruct A,B;
+  protected int type;
+  protected int ID; // number in list 
+  protected boolean shown=true, labelShown=false, valid=true, validNew=true;
+
+  public int getType() 
+  public int getID() 
+  public boolean getShown()
+  public boolean getLabelShown() 
+  public double getX() 	
+  public double getNewX()
+  public double getY() 
+  public double getNewY()
+  public double getZ() 
+  public double getNewZ()
+  public boolean getValid()
+  public boolean getValidNew()
+  public void getXYZ(double[] vector)
+  public void getNewXYZ(double[] vector)
+  public void setID(int i)
+  public void setType(int t)
+  public void setShown(boolean b)
+  public void setValid(boolean x)
+  public void setValidNew(boolean x)
+  public void setLabelShown(boolean b)
+
+	It also gets these abstract methods:
+  public abstract void draw(Graphics g, int SZ, boolean New);
+  public abstract boolean mouseIsOver(double[] v1,int SZ);
+  public abstract void update(boolean isNew);
+  
+TODO:
+-1) create a *Construct.translate() method to translate all of the Constructs in a given list to a new frame of reference.
+
+08_05_11_16:44 (JJ)
+  
+Done:
+1) I completed and tested the *Construct.translate() with respect to the superclassed GeometryPlaneCanvas.translateAll() method.
+  
+TODO: 
+-1) create a Geometery Specific model class that can take care of the specific needs of each of he Geometry Models (DONE)
+-2) refactor the Canvas code to take this into account for each model. (DONE)
+-3) Change isValid to isReal to be consistent with the Load/Save Routines (once we get around to them) (DONE)
+-4) Load/Save Routines
+-5) Inverse Plane
+-6) Make one and only one canvas (DONE)
+-7) implement a "Zoom" method for infinite domains (DONE)
+  		
+08_05_11_16:44 (JJ)  		
+DONE:
+1)created a Geometry Specific Model Class to take care of specific "Canvas" needs of each Geometry Model
+2) refactored the Canvas code.  Reduced the number of Canvases to one.  Call GeometryPlaneCanvas(model) to instantiate
+
+TODO: 
+-1) Change "Valid" References to "Real" References (I am not sure how this goes)
+-2) Load/Save Routines
+-3) Zoom(Done)
+-4) Inverse Planes (for Spherical, Projective, Euclidian)
+The major difference is how we will draw the Planes and their constructs
+-5) Alternate Hyperbolic Planes (Poincare,Klein)(Done)
+The major difference is how we will draw the Planes and their constructs
+-6)Function "rotate" in MathJunk.java will need two versions (one for Projective, one for Hyperbolic), but it currently has three...Projective and Spherical should be able to be collapsed. (not quite done)
+
+08_05_27_14:35 (DH)
+
+Done:
+1) fixed Hyper PTonCIRC
+2) fixed Hyper angle (found an elegant way to calculate it)
+3) had a recurring (though fixed?) bug having to do with lines in Hyperbolic geometry not being recognized by getPotential after moving it.  fixed this by: when moving space, only move points, then update everything else. (in rotateAll).
+4) fixed Hyper PERP: this involved changing the way that lines are graphed, and also required adding the line: list.getLast().update(false); to GeoCanvas after creating a PERP...it turns out that a perpendicular line in hyperbolic geometry can't be calculated the same way (just crossProduct of the point and vector representing the line).  This was a hack fix...to do it properly would require reassigning the way that all lines are calculated.
+5) changed isValid to isReal etc.
+
+08_05_31_22:55 (DH)
+
+Done:
+1) general cleanup
+  a) removed old commented-out code that is no longer needed
+  b) renamed some things (model->geometry, mode->model, ...)
+  c) removed nested MathJunk.chop()s (distance, angle, area)
+2) Alternate models for non-Euclidean geometries; a hack, but it works.
+3) made isMouseOver in HyperPoint more sensitive based on model
+4) made sure user can't create line between antipodal points or perpendicular to line and through its polar point(s) in spherical and projective geometries.  The former was needed now that we have alternate models (before, antipodes couldn't appear together), the latter was already created but had broken.
+
+TODO:
+-1) some way to demonstrate/experiment with transformations?
+-2) toroidal?
+3) taxicab?
+-4) load/save?
+-5) make the zoom feature geometry and model dependent instead of only geometry dependent.  In particular:
+********************************(See 08_06_11)***************************************************
+(geometry, model) =
+(0,0)=(Proj,half-sphere) not needed.
+(0,1)=(Proj,plane) needed? maybe not.
+(1,0)=(Sphere,sphere) not needed.
+(1,1)=(Sphere,plane) needed? maybe not.
+(2,0)=(Eucl,plane) needed.
+(2,1)=(Eucl,proj) not needed.
+(2,2)=(Eucl,inv) needed?
+(3,0)=(Hyp,Poin) not needed.
+(3,1)=(Hyp,Klein) not needed.
+(3,2)=(Hyp,half-plane) needed? maybe, maybe not. if we do it, this will take some care, as the model is infinite, but merely scaling it without translating it will move the bottom below the window.
+(3,3)=(Hyp,Weier) needed.
+
+By the way, I have never gotten the zoom feature to work on a Mac.
+
+I'm feeling really good about this.  The ease with which we transitioned from single model of each geometry to multiple models surprised to me, and again made me realize that the code is well written.  My partner is doing a great job.
+
+08_06_02_14:35 (JJ)
+
+Done:
+1) Got the Euclidean Plane Geometry almost Completed.
+2) Asthetically made the radio buttons for model of geometry disapear when we don't need them.
+
+To Do:
+-1) fix the Perpendicular mouseIsOver(Done 08_06_11)
+-2) fix intersections with Perpendiculars (Done 08_06_11)
+
+08_06_11_13:35 (JJ)
+
+It has been a while since I have last looked at this program
+Done:
+1) Made it so that zoom only works on Euclidean Plane and Hyperbolic Weirstrauss (see To Do (5) 08-05-31). We may adapt some of them, but for now, the ones we are sure of are "on".
+2) Added a norm function to MathJunk
+3) Fixed the Perpendicular mouseIsOver
+4) Got rid of some extra commenting in GeoCanvas.paint.
+5) Fixed PointOnLine
+6) Fixed Perp Intersect Line 
+7) Fixed PointOnCircle
+
+To Do:
+-1) Send to Deej for a bug check.
+-2) Make things more elegant.
+
+BUGZ:
+-1) Hyperbolic Poincare has a glitch when
+   --add a point on a line
+   --adjust a point that makes up the line
+   --point on the line looks as if it "bounces" from the edge
+   --jumps off of the line that it is supposed to be on.
+   
+   Maybe it is fixed by now???? (fixed 08_06_12)
+
+08_06_12_22:12 (DH)
+Done:
+0) Consolidated both sets of changes.
+1) fixed H: PTonLINE
+2) fixed E: angle measures
+3) fixed E: PERP (didn't work for segments)
+4) fixed (added) E: labels for lines and circles.
+5) update(boolean) changed to update()
+6) E: projective model
+
+To Do:
+-1) E: inverted model
+-2) transformations
+-3) save/load?
+-4) toroidal?
+
+BUGZ:
+-1) In E: projective model, when moving a point around and move outside of the valid region, then back on, we have the same problem we had earlier with projective geometry.  How did we fix it back then?
+
+08_06_15_08:48 (DH)
+Done:
+1) Added the save/load routines developed by (JJ).  Noted that if securities are not set properly, loading and saving is not possible, and no explanation is given.
+2) in SphericalLine, added an if statement to "draw" for the planar (1) model so that we don't get occasional lines crossing the screen when the line passes near the south (off screen) pole.
+
+BUGZ:
+-1) In Euclidean Geometry (standard model), one can move a line to the side (for example, to find a PTonLINE that is off screen) and come to the "end of the line".  Of course, this is possible in all infinite geometries, but much more likely when the line only extends a couple units off screen.  I recommend rewriting EuclideanLine.draw so that all three routines draw the line in a bunch of segments, and the loop is the same one used in the inverted (2) model.
+
+08_06_17_23:10 (DH)
+Done:
+1) added transform function to MathEqns and *Construct.
+2) Filled in the transform function for Projective and Spherical.
+3) Tried to allow grabbing and moving points, but since the fixed object may have the point in its ancestry, we will need to keep track of the ancestry of each constructed object, and not allow moving any point in the ancestry of a fixed point.  Currently, doesn't seem worth the effort.
+
+08_06_28_19:24 (DH)
+Done:
+1) filled transform function for H: rotations (fixedObject=pt or circ).
+2) filled transform function for E: rotations (fixedObject=circ).
+3) created function hypPerp(line vector,point vector,(->)perp vector).  
+4) Finished H: translations and reflections (fixedObject=line).
+5) E: rotations & dilations (fixedObject = pt)
+6) E: translations, reflections, & dilations (fixedObject = line)
+7) used the next [good] continued fraction (344/219) for Pi/2 in some line.draw routines (instead of [n*11]/[n*7]).  For future reference:
+
+Pi -> 3, 22/7, 333/106, 355/113, (sudden jump)
+relation -> below Pi, above Pi, below, above, (jump)
+
+Pi/2 -> 2, 3/2, 11/7, 344/219, 355/266, (jump)
+relation -> above, below, above, below, above, (jump)
+
+8) put both acute and obtuse in the angle output (GeoCanvas), but only in degrees (accuracy tenths of a degree), not radians.
+
+08_07_02_22:25 (DH)
+Done:
+1) fixed ProjectiveLine.draw so that labels appear correctly.
+2) fixed HyperLine.draw so that labels appear correctly.
+
+08_07_08_17:30 (DH)
+BUGZ:
+-1) When I move a bisected right angle across the boundary in Projective Geometry, the angle switches to the opposite one...this doesn't happen in the 08_05_30 version, but I can't find any significant difference between the two versions.  It is actually a bigger problem than it seems at first, because many complex constructions exist that require bisected angles, and the whole construction destabilizes when angles suddenly switch.  It was considerably stabler at the end of May...
+
+08_07_10_12:10 (DH)
+Done:
+1) Fixed the projective problem by not using the antipodal equivalence mapping except in draw() and mouseIsOver()...in other words, things in projective are stored as if they were on a sphere, and only drawn as projective points.
+
+08_07_20_17:08 (DH)
+BUGZ:
+-1) Having problems with projective and spherical constructions of icosahedral tilings...when I "Move" the third level of the construction it is highly unstable, with lines and points seeming to move at random.  Traced back: 08_06_14 is stable, 08_06_17 is not.  Note:  June 17 begins implementation of "transform" function.
+
+08_07_21_08:19 (DH)
+Done:
+1) Fixed the instability bug (08_07_20).  Now 08_07_21 is as stable as 08_06_14.
+2) Found and fixed a projective (planar model) bug: lines were always showing the label instead of only if requested.
+
+08_07_25_08:35 (DH)
+Done:
+1) increased stability of the code by eliminating update() as much as possible: when moving a point, only descendants of that point are updated.
+2) applet -> application
+3) cleaned up some of the display stuff
+
+08_07_27_11:15 (DH)
+Done:
+1) fixed PTon for projective and euclidean
+2) created regular tilings of projective and spherical
+3) jar cvf Playground.jar *.class jpsxdec/*.class
+4) keytool -genkey -alias deejKey -keystore .deejstore
+5) passwd: budgie (not correct, but from this JJ can guess the correct one)
+6) jarsigner -keystore .deejstore -storepass budgie -keypass budgie Playground.jar deejKey
+7) re-created Playground.html to link to Playground.jnlp (which loads GeoPlayground)
+8) created 4 tutorial videos
+9) fixed euclidean.angle(), which didn't work for perpendicular lines
+10) updated time stamp, and (optimistically) upgraded version number to 1.0.
+
+08_07_27_22:20 (DH)
+Done:
+1) added a function clearFixedObject() in GeoCanvas, and call it from GeoPlayground whenever we either eraseAll or Load.  Also clearFixedObject when that object is hidden.
+2) cleaned up a last little problem with euclidean.angle()...it sometimes gave the obtuse angle measure instead of the acute.  Now it also says parallel (instead of 0) if the euclideanLines have the same slope (including if they are the same line, oh, well).
+
+08_07_30_22:40 (DH)
+Done:
+1) added the Mercator projection to the Spherical models.
+
+08_08_01_15:19 (DH)
+Done:
+1) WebStart appears to be running correctly on the PLU server (kudos to the PLU server admin, not to me)
+2) updated Playground.* on www.plu.edu.
+3) fixed a minor bug: updated how mouseIsValid() evaluates: it now uses GeoPlayground.model.
+
+08_08_02_19:16 (DH)
+Done:
+1) extended UHP model base line
+2) renumbered 0.10-beta
+
+08_08_04_23:11 (DH)
+Done:
+1) added a new construct: FIXedPT, which can be used to construct objects.  This required changing the way that points are created slightly, since loaded FIXedPTs magically transformed into POINTs.
+2) saved a bunch of constructions
+3) fixed Hyp:PTonCIRC, which was acting erratic.
+4) increased sz to 6, in *Point.draw()
+
+08_08_06_22:49 (DH)
+Done:
+1) corrected the Mercator projection, which involved adding a logarithm to the projection formula...kudos to Chris Meyer for recognizing the difference.
+2) SZ now depends on the height of the canvas
+3) sz of points depends on the SZ of the canvas
+4) sensitivity (measured in pixels) of mouseIsOver() depends on SZ of the canvas
+5) E: all models now have grid lines.
+6) S: mercator projection has light and dark side (for front and back of sphere).
+
+08_08_07 (DH)
+Done:
+1) fixed a bug that allowed a line or circle to be created with only one parent.
+2) added latitude and longitude lines to S: sphere model.
+
+08_08_07_19:19 (JJ)
+Done:
+1) Created Comment Functionality in data files.  If a "!" occurs anywhere in the line it is considered a comment line.
+  This is a comment Line!!!
+2) Automatically creates "!KEY:ID,Type,<x,y,z>,parent-A,parent-B,isShown,hasLabel,isReal" in every file.
+
+08_08_08_07:37 (JJ)
+Done:
+1) Updated all reference to Model to more properly reflect the Model:
+  GeoModel->GeoMetry
+  EuclideanModel->EuclideanGeometry
+  ProjectiveModel->ProjectiveGeometry
+  ...etc. 
+
+08_08_10_20:45 (DH)
+Done:
+1) T: PT, PTonLINE, SEGMENT, LINE, PERP, distance, angle
+2) T: load/save 
+ToDo:
+-1) T: CIRCLE, PTonCIRC, area
+-2) remove intersections from T: load/save
+
+08_08_11_14:48 (DH)
+Done:
+1) T: CIRCLE, PTonCIRC, area
+ToDo:
+-1) T: donut model
+
+08_08_12_12:25 (DH)
+Done:
+1) T: donut model
+2) S: sphere model, created dotted curves behind sphere: commented them out, as i found them really distracting.
+3) miller time!
+
+08_08_14_8:10 (DH)
+Done:
+1) T: segment labels appear
+
+08_08_25_9:48 (DH)
+Done:
+1) Construction: earth.sph
+2) S & P: SEGMENT.draw() uses 128 partitions (instead of 44 & 256 resp.)
+
+08_09_01_20:00 (DH)
+Done:
+1) added "if (discriminant is really small) discriminant=0" to CircleEqns
+
+08_09_06_11:08 (DH)
+Done:
+1) rewrote T: circle.draw() so that all arcs of circles stay inside the boundary lines.
+2) adjusted T: point:draw() so that points appear inside the square, even if the square size is adjusted
+3) S: mercator: line.draw() now draws the label when toggled.
+4) added MIDPT: Playground now makes midpoints in all geometries!
+5) added (and commented out) structure for BISECTORx, where x=0 or 1.  Not yet implemented in *Construct, where there are some technical problems (such as where to start drawing...all other types of lines have at least one point, so there is a starting place...)
+
+08_09_11_23:10 (DH)
+Done:
+1) when point moved out of valid geometry and mouse moved back in, suddenly all points would start moving...fixed that bug by adding boolean alreadyMoving in GeoCanvas.
+
+08_09_16_23:16 (DH)
+Done:
+1) fixed a P: planar model bug in segment.draw()
+
+08_10_03_21:28 (DH)
+BUGZ:
+1) T: PTonLINE doesn't move to closest point when the closest point is over a boundary of the square.
+
+08_10_11_22:00 (DH)
+T: Noticed that parallel lines in toroidal model created by midpoints appeared parallel but had incorrect slopes.  The problem came from rounding: some intersection or mid-points will not be integer valued, so rounding will create that problem.  On the other hand, the non-integer (in fact, sometimes non-rational) values create another problem: it is impossible to draw the entire lines...another pathological problem with no easy solution.  Fixed the midpoint rounding problem.(?)
+
+08_10_13_22:45 (DH)
+T: Have long been unhappy with Toroidal's structure being dependent on the size of the screen (SZxSZ), and changing structure when the screen is resized.  Rewrote it so the base is a 1x1 square.  This created other problems.  In particular, it seems to be impossible in general to calculate where a line will rear end itself.  Indeed, if the slope is irrational, it won't, but even in the rational case, the calculations represent the worst problems of integer-floating point conversions.  In the end I just let the lines fade into oblivion by tweaking the color, and even then had problems with lines fading sooner or later than my aesthetic sense wanted.
+Also fixed MathEqns.transform(T:).
+
+08_10_14_21:00 (DH)
+Yesterday Ito Tadao agreed to work on curriculum development for geometry playground.  Today I showed it to Ido-san, one of Kobayashi's graduate students.  We were discussing the conformal structure on a torus, and how it changes depending on the shape of the fundamental domain.  She had trouble understanding, so I pulled out GP and asked her to click on Toroidal geometry, then make two points, then make the circle that they define.  Then she started playing, and discovered for herself how large circles don't look like circles, and could easily picture the rectangular or hexagonal case.  She was ecstatic, and I realized that the program is a success...her excitement at being able to play with the math and discover for herself why something is true was exactly what i was shooting for.
+
+08_10_28_20:46 (DH)
+Fixed a minor bug that sometimes shut off the fingerCursor when moving objects around.  I don't like the index-finger-pointing cursor (Cursor.HAND_Cursor) that appears when moving things around...I think it should be a pointing finger for moving points around, but an open hand when moving the space around.
+
+ToDo: Cursor.HAND_Cursor switched when moving the space.
+
+08_11_09_19:45 (DH)
+ToDo: we need a tool that allows the user to scroll through the possible objects to highlight. for example, create a line, and create 3 points on the line.  use those three points to create two segments.  now try to hide one of the segments without hiding the line...impossible.  right now, the first object that can be highlighted is the only one that can be chosen.
+
+08_11_13_23:47 (DH)
+Done:
+1) Added a scaling factor to the number of steps in the H: circle drawing loop, since there weren't enough divisions of the circle for very large circles.  Now, of course, the program becomes slower as the radius of the circle increases.
+2) Added a fudge factor to E: calculateCC routine (in E, not in CircEqns) so that intersections calculate correctly even if the points involved lie on a vertical line.
+
+08_11_14_11:07 (DH)
+Done:
+1) E: Inverted model: circle.draw() now draws circles correctly even if the center is close to the origin (i.e. infinity in this model).
+2) E & H: planar models: setScale() now works with a keyPress from the number pad, arrow keys, or the mouseWheel.  It also allows the scale to be reset no matter what we are doing at the moment.
+
+08_11_20_20:00 (DH)
+Done:
+1) E: Inverted model circles now draw correctly, even if the circle goes through the origin.
+2) E & H: Fixed some residual problems with setScale()
+3) the scale factor in appropriate E & H models now works with up & down arrow keys.
+
+08_11_30_22:23 (DH)
+Done:
+1) consolidated two sets of changes (JJ & DH) to GeoCanvas
+2) DISTANCE is now dynamic in all geometries.
+ToDo:
+-1) ANGLE, CIRCUMF, AREA dynamic
+-2) remove distance(), angle(), and area() functions from geoMetry.
+
+08_12_05_09:20 (DH)
+Done:
+1) Shortened GeoCanvas slightly by removing duplications; "measure" now fits under the same category as "make"
+
+ToDo:
+-1) Don't like "convertMouseToCoord()" since it makes points hard to click in some models.  Can we compare the screen positions of mouse and point instead?  Not sure how we could make lines and circles easier...
+
+08_12_11_23:33 (JJ)
+1) Created new Constructors
+public EuclideanConstruct(int t, LinkedList<GeoConstruct> clickedList,double[] v)
+public EuclideanPoint(int t, LinkedList<GeoConstruct> clickedList,double[] v)
+2) Adjusted the parameters of GeoMetry.EuclideanGeometry.createPoint to 
+   (int Type,LinkedList<GeoConstruct> clickedList,GeoConstruct potentialClick,GeoConstruct thisClick,double[] vector1)
+   This was done to check the new Constructor without breaking the rest of the code.
+3) changed the addPointTo line of the above function to EuclideanPoint(t,clickedList,v)
+4) changed appropriate lines in GeoCanvas to do the updating that addPointTo was automatically doing.
+
+ToDo:
+-1) Change GeoMetry.EuclideanGeometry.createPoint to only use a list (done JJ 08_12_12)
+-2) update all references to above. (done JJ 08_12_12)
+-3) Change all appropriate potClick, firstClicked parameter references to use the list...
+   and make sure that we are feeding the function an appropriate list.
+
+08_12_12_08:33 (JJ)
+1) Added setNewXYZ(vector) to all base constructors of the (Type, vector) and (Type,list,vector) variety
+This is because I am using the update() that looks at NewXYZ for updates.
+The CreatePoint routine that I added to replace addPointTo does not automatically update the point to the appropriate location.
+2) Finished 2,3 in yesterday's ToDo list.
+3) Changed all GeoMetry.*.CreatePoint functions to use a switch statement that depends on the length of the clickedList
+   I am fully aware that this may spawn moving the switch function up the class/functional hierarchy.
+3) Removed all declarations of addPointTo.
+ToDo:
+-1) Think about adjusting the CreatePoint method in GeoMetry to purely the Constructor(type,list,vector) variety.
+-2) ToDo (3) on 08_12_11
+-3) Let Deej work his magick on Measures
+
+08_12_12_23:04 (DH)
+Done:
+1) Distance, Circumference, and Area of Circles.
+ToDo:
+-1) Bisectors, Angle Measures.
+-2) PTon* orphaned when the line/circle they are on becomes invalid and then valid again.  This includes measures.
+
+08_12_14_13:41 (DH)
+Done:
+1) PTon* no longer orphaned
+2) Angle measures now work in all geometries
+3) fixed an invisible bug that had hyperbolic creating two LINEintLINEs.
+ToDo:
+-1) Bisectors
+-2) getPotentialPointOrMeasure() has a clause disallowing ANGLES...that will need to go once we get angle measures attached to Bisectors.
+-3) Load isn't reading {n} correctly, though {}, {n,m}, and {n,m,p} seem fine.
+
+08_12_14_22:09 (DH)
+Done:
+1) Angle Bisectors work in all geometries except T
+ToDo:
+-1) T: Angle Bisectors
+-2) See 08_12_14_13:41 (2) & (3)
+-3) Attach Angle measures to angle bisectors.
+
+08_12_15_09:31 (DH)
+Done:
+1) Angle Bisectors now work in all geometries.
+2) Fixed a bug in H: MIDPT
+ToDo:
+-1) Attach Angle measures to Bisectors
+-2) Load {n}, see 08_12_14_13:41 (3)
+-3) getPotentialPointOrMeasure() clause deleted
+
+08_12_15_15:25 (DH)
+Done:
+1) Angle measure now attached to BISECTOR
+2) getPotentialPointOrMeasure() clause deleted
+3) Multiple identical angle measures no longer constructible.
+ToDo:
+-1) Projective angle doesn't create correctly
+-2) when updating Spherical angle, BISECTOR can get set to 0.
+
+08_12_15_17:50 (DH)
+Done:
+1) Projective Angles work
+2) Spherical angles don't zero out
+ToDo:
+-1) Load {n} bug fix!
+
+08_12_15_23:30 (DH)
+Done:
+1) Toroidal Angles appear correctly in both models.
+ToDo:
+-1) Load {n} bug fix.
+
+08_12_16_21:41 (DH)
+Done:
+1) fixed a bug that sometimes had DISTANCE attached to a BISECTOR.
+2) fixed a bug that allowed circles to be valid even when one of their points was invalid.
+ToDo:
+-1) Load {n} bug fix. (done! by JJ on 08_12_17)
+
+08_12_17 (JJ)
+Done:
+1) Load {n} bug fix.
+
+08_12_23_19:05 (JJ)
+Done:
+1) Did some documentation on GeoPlayground
+2) Adjusted some code to remove "Warnings" in GeoPlayground
+3) Set up a template to document the inner workings of all classes in a latex file.  I am going to need some help in getting this done!
+
+08_12_27_22:09 (DH)
+Done:
+1) Angle bisectors now work even if the second point is the midpoint of the other two.
+
+09_01_05_21:56 (DH)
+Done:
+1) Fixed the bug that made perps based on perps update incorrectly.
+2) Made lines and segments invalid if based on two points that are too close (i.e., the same).
+3) in GeoCanvas.mouseClicked(), if potentialClick=null, it is no longer added to clickedList.
+
+09_01_07_09:20 (JJ)
+Done:
+1) Created the switch statements that in EucGeoMetry that will manage the creation of points and lines, but not intersections, for the refactoring
+2) Created new "hollow" subclasses of Euc Point and Line: PTonLINE, PTonCIRC,LINEintLINE, ..... 
+   NOTE: I did not enumerate intersections
+3) Updated the Euc intersections routines to create the new above intersections
+4) Tested the code to make sure it still works
+
+TODO: 
+-1) Fill in the "hollow" subclasses in EuclideanConstruct.java.  This can be done by considering what the superclass would do on its own... and the special needs of the subclass.(JJ)
+
+09_01_09_01:27 (JJ)
+Done:
+1) TODO 09_01_07
+Noticings:
+1) Why is the color of the object separate from the objects themselves?  Why can't the objects posess color without the funky ColorSet in GeoCanvas?
+2) Noticed: When I move either a circle or a line their valid intersection disappears with their new invalid one.
+
+09_01_11_21:53 (JJ)
+Done:
+1)Updated GeoMetry to have CreateLines updated for all Geometries
+
+09_01_17_15:25 (DH)
+Done:
+1) code refactored.
+2) fixed numerous subtle bugs
+3) added color to messages
+4) abbreviated tabs when screen is small.
+5) moved all messages to IOStrings.java, backed up as IOStrings.eng, with a Japanese translation saved as IOStrings.jap.
+ToDo:
+-1) Find some way to make language transition simpler.
+-2) Set up Wiki
+
+09_01_19_20:37 (DH)
+Done:
+1) removed dead code in GeoMetry & GeoCanvas.
+2) GeoCanvas.drawAllConstructs() now draws lines & circles first, then points for a more consistent appearance.
+
+09_01_21_21:23 (DH)
+Done:
+1) English messages in Messages.properties, Japanese in Messages_jp.properties
+2) IOStrings.java now reads Messages_xx.properties catalogs.
+
+09_01_22_23:00 (DH)
+Done:
+1) GeoCanvas: check for validity of ancestry before updating (which was missed for some constructs
+2) removed ancestry validity check from individual construct update()s
+3) GeoCanvas: added validity check in drawAllConstructs().
+4) Rachid has agreed to translate Arabic & French message files, Josh to find someone to translate Chinese, Ksenija Russian, Margarita Spanish, and Chuck Cornell to ask his son to translate Portuguese.
+
+09_02_02_0949 (DH)
+Haven't made notes in a few days. Done:
+1) Moved all menus to standard menus.
+2) After my friend in Honduras couldn't read the Spanish messages, added a menu for choosing languages.
+3) segments now act as segments in terms of the existence of their points of intersection with other objects.
+ToDo:
+-1) fixSegmentBug fix.
+
+09_02_10_1515 (DH)
+Done:
+1) Angle(A,A,B) is no longer constructible or measurable.
+2) Distances and angle measures now appear on the top of the sphere in the sphere model of spherical geometry.
+3) fixedObject now updates if changing a segment or line into a line or segment.
+
+09_02_18_2206 (DH)
+Done:
+1) Dilations removed from E and M; all transformations are isometries.
+2) isometries of M include reflections if slope = 0, 1, -1, and infinity.
+3) Removed partial (bad) Chinese translation.
+4) Fixed "circles occasionally declared invalid in M:" bug.
+
+09_02_23_1916 (DH)
+Done:
+1) Josh fixed something about the way that lines were graphing in E and M on PCs
+2) The fix in 1 created new problems for vertical lines, fixed.
+3) The fix in 1 created new problems for M:transform, fixed.
+ToDo:
+-1) M:FIXedBISECTORS don't transform.reflect() correctly (now they aren't allowed to reflect if their slope is +/-1 [as a partial fix]).
+
+09_03_10_2255 (DH)
+Done:
+1) SaveLoad now remembers the last directory used.
+2) Arabic Message Catalog added.
+
+09_04_29_1455 (DH)
+Haven't added to notes in quite some time.
+Done:
+1) Added RATIO and SUM as types of Measurements.
+2) Added Digits submenu in MeasureMenu to set the number of decimal places shown when measuring.
+3) Added Scale factors to Planar Models of Spherical and Projective
+4) Added Korean messages
+5) GeoCanvas now allows creation of objects without requiring pre-creation of points.  If potentialClick is a point it is added to clickedList, if a composite, GeoCanvas creates a PTonLINE or PTonCIRC in clickedList, if nothing, a point is created in clickedList...then these are added to list if enough are racked up to create the object in question.
+6) sent backup copy to Josh
+
+09_04_29_1922 (DH)
+Done:
+1) S: & P: segments didn't scale right...fixed.
+
+09_05_04_2224 (DH)
+Done:
+1) Hungarian added
+2) added choice of degree or radian for angle measure
+3) Added DIFF(erence) as type of measurement
+4) fixed P:MathEqns.normalize(v) bug
+
+09_05_05_1229 (DH)
+Done:
+1) Spanish, French, and Russian additions checked
+2) PROD(uct) added
+3) SUM, DIFF(erence), and PROD(uct) consolidated into SUM(type)...if statements separate the forms.
+
+09_05_09_2012 (DH)
+Done:
+1) Branch cut bug fixed, except for P:CIRCintCIRC case. If two roots permute, we fixed the problem by simply checking which are closest to which previous, switching if needed.  However, in the projective CIRCintCIRC case, there are four that can permute, and if they move over the boundary, calculating which should be where is horrendous, hence [at the moment] we simply check if 0&1 and 2&3 need to be permuted, but not whether {0,1}&{2,3} need to be permuted, etc.
+
+09_05_11_1006 (DH)
+Done:
+1) Branch cut bug now fixed completely.
+2) Labels on rescaled circles now drawn in their correct positions in spherical and projective.
+3) unverified translations commented out
+4) Arabic unscaled.  We had scaled up the font, but it looked horrible on some monitors.
+ToDo:
+-1) verify translations of new functions in Marathi, Arabic, Hungarian
+
+09_07_20_1647 (DH)
+Haven't commented in quite some time.
+Done:
+1) Verified translations in Marathi and Hungarian
+2) SaveLoad now allows files to be opened from the web by beginning the address with http://
+3) .jnlp file can now contain one or two arguments: the first is a web address that GP will use to open a construction (first switching to the correct geometry), the second is an integer 0-3 representing the model of the opened construction's geometry.
+4) Added scaling factors to plane models of spherical and projective geometries.
+ToDo:
+-1) Verify Arabic translations.
+-2) Sit back and relax.
+
+09_12_18_1853 (DH)
+Haven't commented in some time.
+Done:
+1) Added type CONSTANT, which can only be manipulated via the saved file.  The z-coordinate is replaced by the value of the constant.  When opening the file, the constant is read, and the z-coordinate then correctly calculated.  A hack addition, but useful for teachers.
+2) Added Chinese Translation.
+3) Added Reflect, Rotate, and Translate Point as capabilities under "Manipulate" menu.
+4) Added Parallel Lines, including double parallels in Hyperbolic.  These will need to be translated into non-English languages.
+5) Points on Segments now stay on the segment when moved (or when moving the segment).
+ToDo:
+-1) measure triangle area?
+-2) rays?
+-3) unary?
+-4) appletize?
+
+09_12_21_23:36 (DH)
+Done:
+1) Added Rays.  In S, P, and T, rays can be constructed, but are the same type as lines.
+2) patched the fix for the branch cut bug...although the fix of the branch cut bug swapped coordinates if needed, it failed to swap validity, so sometimes invalid coordinates appeared and valid ones didn't.
+3) made sure that intersections and points on line types that fall off the ends of segments or rays are invalid.
+4) MeasureTri(angle Area) has been added.
+ToDo:
+-1) add linguistic translations for reflect, rotate, translate, parallel, and ray: spanish, french, arabic, marathi, chinese, hungarian, russian.
+-2) unary?
+-3) appletize?
+
+10_01_22_12:05 (DH)
+Done:
+1) GeoCanvas: Segments and Rays cannot be chosen (potentialClick) from outside their domains...i.e., from off their ends.
+2) linguistic translations for chinese, russian verified.
+toDo:
+-1) translate and verify new messages for spanish, french, arabic, marathi, and hungarian (reflect, rotate, translate, parallel, and ray)
+
+10_02_08_12:29 (DH)
+Done:
+1) Invert tool added
+2) Arabic verified
+
+10_02_18_11:18 (DH)
+Done:
+1) added a fudge factor to center graphs horizontally
+2) fixed minor bugs in E: line.draw()
+
+10_04_10 11:44 (DH)
+Done:
+1) H: Reflect bug fixed
+ToDo:
+-1) translate: create line type: vector first, then translate by vector.
+-2) Italian: Jeff Weeks
+
+10_04_18 15:03 (DH)
+Done:
+1) E:Line.ShowLabel() bug fixed
+2) Save .jpg function added
+
+Done, but not committed:
+1) Appletized
+2) Removed gridLines from E, S
+3) White background (for higher quality .jpgs)
+4) Change to v.1.3
+ToDo:
+-1) Add Track (use FIXedPTs, construct similar to FixedObject)
+-2) translate: create line type: vector first, then translate by vector.
+-3) Italian: Jeff Weeks
+
+10_04_20 11:17 (DH)
+Done, not committed:
+1) Added Track Point function
+2) fixed minor bugs that became clear when tracking
+ToDo:
+-1) TranslatePt: create line type: vector, then translate by vector.
+-2) Italian: Jeff Weeks
+-3) Track Line? Track Circle?
+-4) FutureList (from clickedList and potentialClick, highlightGraph the futureConstruct)
+
+10_06_14 14:28 (DH)
+Done:
+1) Italian
+Done, not committed:
+1) FutureList
+2) Conical Geometry
+3) reorganized geometries (3=hyperbolic, 4=manhattan, 5=toroidal, 6=conical)
+ToDo:
+-1) TranslatePt: create line type: vector, then translate by vector.
+-2) C:Triangle?
+
+10_10_05 09:24 (DH)
+Done:
+1) Portuguese
+2) Turkish
+3) C: Triangle (actually finished 10_08?)
+4) added "edit label" capability (10_08?)
+5) committed recent developments
+6) re-recorded Playground1,2,3.swf tutorial videos
+
+11_07_01 10:45 (DH)
+Done:
+1) FIXedPTs can now be constructed from the main program
+2) updated wiki (in particular, concerning FIXedPTs and C)
+3) committed recent developments
+
+11_07_01 15:15 (DH)
+Done:
+1) Constants can now be constructed from the main program
+2) updated wiki regarding constants
+3) committed.
+
+12_02_28 09:30 (DH)
+Done:
+1) added Comment function
+2) moved pop-up strings into Messages.properties
+3) updated version number and copyright
+4) committed.
+5) updated wiki concerning Comments and Track Points
+6) updated main GP webpage
+Problem:
+-1) wiki rewrite by spam engine (start 12_02_01, with regular rewrites since then)
+
+12_02_29 11:30 (DH)
+Done:
+1) wiki spam removed, blocked.
+
+12_03_01 13:00 (DH)
+Done:
+1) read pop-up strings from GeoPlayground (so they update with change in language)
+2) updated japanese message catalogs
+3) fixed null-string bug after pop-up dialog canceled

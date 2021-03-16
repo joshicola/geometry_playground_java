@@ -1,0 +1,14 @@
+Geometry:Euclidean
+!KEY:ID;Type;<x;y;z>;{parent-1;parent-2;...};isShown;hasLabel;isReal;displayString
+0;FIXedPT;<1.0E-4;0.0;0.0>;{};true;false;true;
+1;FIXedPT;<0.0;-1.0;0.0>;{};true;false;true;
+2;FIXedPT;<0.9510565165;-0.3090169938;0.0>;{};true;false;true;
+3;FIXedPT;<0.5877852524;0.8090169943;0.0>;{};true;false;true;
+4;FIXedPT;<-0.5877852524;0.8090169943;0.0>;{};true;false;true;
+5;FIXedPT;<-0.9510565165;-0.3090169938;0.0>;{};true;false;true;
+6;CIRCLE;<-0.0;1.0E-4;0.0>;{0;1};true;false;true;
+7;SEGMENT;<-0.9510565165;-0.6909830062;0.0>;{1;2};true;false;true;
+8;SEGMENT;<0.3632712641;-1.1180339880999999;0.0>;{2;3};true;false;true;
+9;SEGMENT;<1.1755705048;0.0;0.0>;{3;4};true;false;true;
+10;SEGMENT;<0.3632712641;1.1180339880999999;0.0>;{4;5};true;false;true;
+11;SEGMENT;<0.9510565165;-0.6909830062;0.0>;{1;5};true;false;true;

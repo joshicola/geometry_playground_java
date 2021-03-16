@@ -1,0 +1,132 @@
+//Translators:  More complete explanations of what the following lines of text are associated with,
+//              please look at http://students.washington.edu/josher/mediawiki/index.php?title=Instructions.
+//              
+//              Only the text on the right needs to be translated.
+
+copyright = Geometry Playground 1.4 \u00A9 2009-12 by D. Heath, PLU, and J. Jacobs, UW
+
+//File Menu Text
+fileText = File 
+renewText = New
+loadItText = Open
+saveItText = Save
+undoText = Undo
+quitText = Quit
+
+//Construct Menu Text
+makeText = Construct 
+pointText = Points
+mdPtText =  Midpoints
+intText =  Intersections
+fxPtText =  Fixed Point
+lineText = Lines
+segmentText =  Segments
+perpText =  Perpendiculars
+parllText = Parallels
+bisectorText =  Angle Bisectors
+rayText = Rays
+circleText = Circles
+
+//Measure Menu Text
+measureText = Measure 
+distanceText = Distance
+angleText = Angle
+circumText = Circumference
+areaText = Area
+triangleText = Triangles
+sumText = Sum
+diffText = Difference
+prodText = Product
+ratioText = Ratio
+cnstText = Constant
+digitText = Digits
+
+//Manipulate Menu Text
+moveText = Manipulate
+transformText = Transform
+fixText = Fix an Object
+trackText = Track Point
+reflectText = Reflect
+rotateText = Rotate
+translateText = Translate
+invertText = Invert
+
+//Display Menu Text
+displayText = Display
+hideText = Hide
+showText = Show All
+measText = Measures
+objectsText = Objects
+labelText = Label
+modelsText = Model
+scaleText = Scale
+upText = Up
+downText = Down
+
+//Language Menu Text
+languageText = (your language)
+helpText =  Help
+aboutText = About
+
+//PopUpMenus Text
+newLabelText = New Label:
+currentLabelText = Current Label:
+
+//The lines are status bar text that describe various activities that have 
+//been selected by menus or keyboard shortcuts 
+MakePointsText = Make points by clicking in the geometry, or on an object.
+MakeMdPtText = Select two points to construct the midpoint of their segment.
+MakeFxPtText = Make fixed points by clicking in the geometry.
+MakeIntText = Select two constructions to find their intersection.
+MakeSegmentText = Select two points to construct the segment they determine.
+MakeLinesText = Select two points to construct the line they determine.
+MakePerpsText = Select a line and a point to construct the perpendicular.
+MakeParllsText = Select a line and a point to construct the parallel line(s).
+MakeBisectText = Select points A, B, C to construct the bisector of \u2220ABC.
+MakeRaysText = Select two points to construct the ray they determine.
+MakeCirclesText = Construct a circle by selecting a center and a point on it.
+MeasureDistText = Select two points to measure the distance between them.
+MeasureAngleText = Select points A, B, C to measure \u2220ABC.
+MeasureCircText = Select a circle to measure its circumference.
+MeasureAreaText = Select a circle to measure its area.
+MeasureTriText = Select three points to measure the area of the triangle they determine.
+MeasureSumText = Select two measures X, Y to measure the sum X+Y.
+MeasureDiffText = Select two measures X, Y to measure the difference X-Y.
+MeasureProdText = Select two measures X, Y to measure the product X*Y.
+MeasureRatioText = Select two measures X, Y to measure the ratio X/Y.
+MeasureCnstText = Make a constant by clicking in the geometry.
+MoveText = Click and drag a point to move it, or drag the space itself.
+FixObjectText = Select an object to fix it in space.
+TrackPtText = Select a point to track.
+ReflectPtText = Select a line of reflection and a point to reflect.
+RotatePtText = Select angle measure X and point Y to rotate point Y by \u2220X.
+TranslatePtText = Select distance measure X and a point Y to translate point Y by vector X.
+InvertPtText = Select a circle of inversion and a point to invert.
+HideObjectText = Select an object to hide it.
+LabelObjectText = Select an object to show or hide its label.
+DefaultText = Geometry Playground \u00a9 2010 by D. Heath, PLU, and J. Jacobs, UW
+
+//These are the names of the geometries in various languages. 
+SphBigText = Spherical
+PrjBigText = Projective
+EucBigText = Euclidean
+HypBigText = Hyperbolic
+ManBigText = Manhattan
+TorBigText = Toroidal
+ConBigText = Conical
+
+//These are the various models for each Geometry
+sphere = Sphere Model
+plane = Plane Model
+halfSphere = Half-Sphere Model
+halfPlane = Half-Plane Model
+square = Square Model
+tiling = Tiled Plane Model
+donut = Donut Model
+cone = Cone Model
+projective = Projective Model
+inverted = Inverted Model
+mercator = Mercator Model
+poincare = Poincar\u00e9 Model
+klein = Beltrami-Klein Model
+weierstrass = Minkowski-Weierstrass Model

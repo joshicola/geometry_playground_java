@@ -1,0 +1,662 @@
+\contentsline {chapter}{\numberline {1}Interface}{2}%
+\contentsline {section}{\numberline {1.1}GeoPlayground}{2}%
+\contentsline {subsection}{\numberline {1.1.1}Tabs}{2}%
+\contentsline {subsection}{\numberline {1.1.2}Radio Buttons}{2}%
+\contentsline {subsubsection}{Make Points}{2}%
+\contentsline {subsubsection}{Make Lines}{2}%
+\contentsline {subsubsection}{Make Circles}{3}%
+\contentsline {subsubsection}{Measure}{3}%
+\contentsline {subsubsection}{Move}{3}%
+\contentsline {subsubsection}{Display}{3}%
+\contentsline {subsubsection}{Model}{3}%
+\contentsline {subsection}{\numberline {1.1.3}Buttons}{3}%
+\contentsline {subsubsection}{doItButton}{3}%
+\contentsline {subsubsection}{Load}{3}%
+\contentsline {subsubsection}{Save}{3}%
+\contentsline {subsection}{\numberline {1.1.4}Instruction Text}{3}%
+\contentsline {chapter}{\numberline {2}Foundation Classes}{4}%
+\contentsline {section}{\numberline {2.1}GeoPlayground}{4}%
+\contentsline {subsection}{\numberline {2.1.1}declarations}{4}%
+\contentsline {paragraph}{eastPanel, cntrPanel, makePtsPanel, makeLn1Panel, makeLn2Panel, makeCrPanel, movePanel, meas1Panel, meas2Panel, display1Panel, display2Panel : JPanel}{4}%
+\contentsline {subsubsection}{tabbedPanePlane : JTabbedPane}{4}%
+\contentsline {subsubsection}{junkPanel : JPanel[]}{4}%
+\contentsline {subsubsection}{canvas : GeoCanvas[]}{4}%
+\contentsline {subsubsection}{whatToDoCBG : ButtonGroup}{4}%
+\contentsline {subsubsection}{makePtsButton, makeLnsButton, makeIntButton, makePrpButton, makeCrsButton, moveButton, measDistButton, measAngleButton, measAreaButton, hideButton, unhideButton, makeSegButton, labelButton, clearButton, fixButton, makeMPButton, measCircButton, makeBSButton : JRadioButton}{5}%
+\contentsline {subsubsection}{modelCBG : ButtonGroup}{5}%
+\contentsline {subsubsection}{modelButton : JRadioButton[]}{5}%
+\contentsline {subsubsection}{doItButton : Button}{5}%
+\contentsline {subsubsection}{infoLabel : JLabel[]}{5}%
+\contentsline {subsubsection}{whatToDo : int}{5}%
+\contentsline {subsubsection}{model : int}{5}%
+\contentsline {subsubsection}{MakePoints, MakeLines, MakeInt, MakePerps, MakeCircles, Move, MeasureDist, MeasureAngle, MeasureArea, HideObject, UnhideAll, MakeSegment, LabelObject, ClearAll, FixObject, MakeMdPt, MeasureCirc, MakeBisect : int}{5}%
+\contentsline {subsubsection}{geoModel : int[]}{5}%
+\contentsline {subsubsection}{CANVASSIZE : int}{5}%
+\contentsline {subsubsection}{textString : String}{5}%
+\contentsline {subsubsection}{saveButton : Button}{6}%
+\contentsline {subsubsection}{loadButton : Button}{6}%
+\contentsline {subsection}{\numberline {2.1.2}methods}{6}%
+\contentsline {subsubsection}{init()}{6}%
+\contentsline {subsubsection}{setInfoTA()}{6}%
+\contentsline {subsubsection}{itemStateChanged(ItemEvent)}{6}%
+\contentsline {subsubsection}{stateChanged(ChangeEvent)}{6}%
+\contentsline {subsubsection}{actionPerformed(ActionEvent)}{6}%
+\contentsline {subsubsection}{createAndShowGUI()}{6}%
+\contentsline {subsubsection}{main(String)}{6}%
+\contentsline {subsubsection}{getHght(), getWdth()}{6}%
+\contentsline {section}{\numberline {2.2}GeoCanvas}{6}%
+\contentsline {subsection}{\numberline {2.2.1}declarations}{6}%
+\contentsline {subsubsection}{SZ : int}{6}%
+\contentsline {subsubsection}{BISECTOR, SEGMENT, PERP, LINE, CIRCLE, POINT, PTonLINE, PTonCIRC, LINEintLINE0,LINEintLINE1, CIRCintLINE0, CIRCintLINE1, CIRCintCIRC00, CIRCintCIRC01, CIRCintCIRC10, CIRCintCIRC11, MIDPT, FIXedPT, DISTANCE, AREA, CIRCUMF, ANGLE: int}{7}%
+\contentsline {subsubsection}{typedKey: int}{7}%
+\contentsline {subsubsection}{whereAtInList: int}{7}%
+\contentsline {subsubsection}{alreadyMoving : boolean}{7}%
+\contentsline {subsubsection}{geometryListener : ChangeListener}{7}%
+\contentsline {subsubsection}{geometry : GeoMetry}{7}%
+\contentsline {subsubsection}{list : LinkedList$<$GeoConstruct$>$ }{7}%
+\contentsline {subsubsection}{clickedList : LinkedList$<$GeoConstruct$>$ }{7}%
+\contentsline {subsubsection}{potentialClick : GeoConstruct}{7}%
+\contentsline {subsubsection}{firstClicked : GeoConstruct}{7}%
+\contentsline {subsubsection}{fixedObject : GeoConstruct}{7}%
+\contentsline {subsubsection}{vector1 : double[]}{7}%
+\contentsline {subsubsection}{vector2 : double[]}{8}%
+\contentsline {subsubsection}{norm : double[]}{8}%
+\contentsline {subsubsection}{binorm : double[]}{8}%
+\contentsline {subsubsection}{dragStart : double[]}{8}%
+\contentsline {subsubsection}{dragNow : double[]}{8}%
+\contentsline {subsection}{\numberline {2.2.2}methods}{8}%
+\contentsline {subsubsection}{GeoCanvas()}{8}%
+\contentsline {subsubsection}{GeoCanvas(GeoMetry)}{8}%
+\contentsline {subsubsection}{clearFixedObject()}{8}%
+\contentsline {subsubsection}{paint(Graphics)}{8}%
+\contentsline {subsubsection}{colorSet(Graphics, GeoConstruct, boolean)}{8}%
+\contentsline {subsubsection}{drawAllConstructs(Graphics, boolean)}{8}%
+\contentsline {subsubsection}{translateAll()}{8}%
+\contentsline {subsubsection}{getPotentialAny(double[])}{9}%
+\contentsline {subsubsection}{getPotentialComposite(double[])}{9}%
+\contentsline {subsubsection}{getPotentialLine(double[])}{9}%
+\contentsline {subsubsection}{getPotentialCircle(double[])}{9}%
+\contentsline {subsubsection}{getPotentialPointOrMeasure(double[])}{9}%
+\contentsline {subsubsection}{getPotentialPointOrInt(double[])}{9}%
+\contentsline {subsubsection}{getPotentialPointOrIntOrMeasure(double[])}{9}%
+\contentsline {subsubsection}{addChangeListener(ChangeListener)}{9}%
+\contentsline {subsubsection}{mousePressed(MouseEvent)}{9}%
+\contentsline {subsubsection}{mouseMoved(MouseEvent)}{9}%
+\contentsline {subsubsection}{mouseDragged(MouseEvent)}{9}%
+\contentsline {subsubsection}{mouseReleased(MouseEvent)}{9}%
+\contentsline {subsubsection}{mouseEntered(MouseEvent)}{9}%
+\contentsline {subsubsection}{mouseExited(MouseEvent)}{9}%
+\contentsline {subsubsection}{mouseClicked(MouseEvent)}{9}%
+\contentsline {subparagraph}{FixObject}{10}%
+\contentsline {subparagraph}{MakePoints}{10}%
+\contentsline {subparagraph}{MakeMdPt}{10}%
+\contentsline {subparagraph}{MeasureCirc}{10}%
+\contentsline {subparagraph}{MeasureArea}{10}%
+\contentsline {subparagraph}{MeasureDist}{10}%
+\contentsline {subparagraph}{MeasureAngle}{10}%
+\contentsline {subparagraph}{MakeBisect}{10}%
+\contentsline {subparagraph}{MakeLines,MakeSegment}{10}%
+\contentsline {subparagraph}{MakeCircles}{10}%
+\contentsline {subparagraph}{MakeInt}{10}%
+\contentsline {subparagraph}{MakePerps}{11}%
+\contentsline {subparagraph}{HideObject}{11}%
+\contentsline {subparagraph}{LabelObject}{11}%
+\contentsline {subsubsection}{mouseWheelMoved(MouseWheelEvent)}{11}%
+\contentsline {subsubsection}{keyTyped(KeyEvent)}{11}%
+\contentsline {subsubsection}{keyPressed(KeyEvent)}{11}%
+\contentsline {subsubsection}{keyReleased(KeyEvent)}{11}%
+\contentsline {section}{\numberline {2.3}GeoMetry}{11}%
+\contentsline {subsection}{\numberline {2.3.1}declarations}{11}%
+\contentsline {subsubsection}{methods}{11}%
+\contentsline {subsubsection}{getCurvature()}{11}%
+\contentsline {subsubsection}{drawModel(Graphics, int)}{11}%
+\contentsline {subsubsection}{convertMousetoCoord(MouseEvent, int)}{11}%
+\contentsline {subsubsection}{mouseIsValid(double[])}{11}%
+\contentsline {subsubsection}{createPoint(int, LinkedList$<$GeoConstruct$>$ , double[])}{11}%
+\contentsline {subsubsection}{createLine(int, LinkedList$<$GeoConstruct$>$ )}{12}%
+\contentsline {subsubsection}{createCircle(GeoConstruct, GeoConstruct)}{12}%
+\contentsline {subsubsection}{createIntersections(GeoConstruct, GeoConstruct, LinkedList$<$GeoConstruct$>$ )}{12}%
+\contentsline {subsubsection}{dotProduct(double[], double[])}{12}%
+\contentsline {subsubsection}{crossProduct(double[], double[])}{12}%
+\contentsline {subsubsection}{acos(double)}{12}%
+\contentsline {subsubsection}{distance(GeoConstruct, GeoConstruct)}{12}%
+\contentsline {subsubsection}{angle(GeoConstruct, GeoConstruct)}{12}%
+\contentsline {subsubsection}{area(GeoConstruct, boolean)}{12}%
+\contentsline {subsubsection}{getScale()}{12}%
+\contentsline {subsubsection}{setScale(double)}{12}%
+\contentsline {subsubsection}{extension()}{12}%
+\contentsline {subsubsection}{getName()}{12}%
+\contentsline {subsubsection}{getFileFilter()}{12}%
+\contentsline {section}{\numberline {2.4}GeoConstruct}{12}%
+\contentsline {subsection}{\numberline {2.4.1}declarations}{12}%
+\contentsline {subsubsection}{BISECTOR, SEGMENT, PERP, LINE, CIRCLE, POINT, PTonLINE, PTonCIRC, LINEintLINE0, LINEintLINE1, CIRCintLINE0, CIRCintLINE1, CIRCintCIRC00, CIRCintCIRC01, CIRCintCIRC10, CIRCintCIRC11, MIDPT, FIXedPT, DISTANCE, ANGLE, CIRCUMF, AREA : int}{12}%
+\contentsline {subsubsection}{x : double}{12}%
+\contentsline {subsubsection}{y : double}{13}%
+\contentsline {subsubsection}{z : double}{13}%
+\contentsline {subsubsection}{newX : double}{13}%
+\contentsline {subsubsection}{newY : double}{13}%
+\contentsline {subsubsection}{newZ : double}{13}%
+\contentsline {subsubsection}{constList : LinkedList$<$GeoConstruct$>$ }{13}%
+\contentsline {subsubsection}{type : int}{13}%
+\contentsline {subsubsection}{ID : int}{13}%
+\contentsline {subsubsection}{shown : boolean}{13}%
+\contentsline {subsubsection}{labelShown : boolean}{13}%
+\contentsline {subsubsection}{isReal : boolean}{13}%
+\contentsline {subsubsection}{isRealNew : boolean}{13}%
+\contentsline {subsection}{\numberline {2.4.2}methods}{13}%
+\contentsline {subsubsection}{GeoConstruct()}{13}%
+\contentsline {subsubsection}{GeoConstruct(int, double[])}{13}%
+\contentsline {subsubsection}{GeoConstruct(int, double[], double[])}{14}%
+\contentsline {subsubsection}{GeoConstruct(int, GeoConstruct, GeoConstruct)}{14}%
+\contentsline {subsubsection}{GeoConstruct(int, double[], GeoConstruct)}{14}%
+\contentsline {subsubsection}{getType()}{14}%
+\contentsline {subsubsection}{getID()}{14}%
+\contentsline {subsubsection}{getShown()}{14}%
+\contentsline {subsubsection}{getLabelShown()}{14}%
+\contentsline {subsubsection}{getX()}{14}%
+\contentsline {subsubsection}{getNewX()}{14}%
+\contentsline {subsubsection}{getY()}{14}%
+\contentsline {subsubsection}{getNewY()}{14}%
+\contentsline {subsubsection}{getZ()}{14}%
+\contentsline {subsubsection}{getNewZ()}{14}%
+\contentsline {subsubsection}{getValid()}{14}%
+\contentsline {subsubsection}{getValidNew()}{14}%
+\contentsline {subsubsection}{getSize()}{14}%
+\contentsline {subsubsection}{get(int)}{14}%
+\contentsline {subsubsection}{getXYZ(double[])}{14}%
+\contentsline {subsubsection}{getNewXYZ(double[])}{15}%
+\contentsline {subsubsection}{setID(int)}{15}%
+\contentsline {subsubsection}{setType(int)}{15}%
+\contentsline {subsubsection}{setShown(boolean)}{15}%
+\contentsline {subsubsection}{setValid(boolean)}{15}%
+\contentsline {subsubsection}{setValidNew(boolean)}{15}%
+\contentsline {subsubsection}{setLabelShown(boolean)}{15}%
+\contentsline {subsubsection}{setXYZ(double[])}{15}%
+\contentsline {subsubsection}{setXYZ(double[], double[])}{15}%
+\contentsline {subsubsection}{setNewXYZ(double[])}{15}%
+\contentsline {subsubsection}{setNewXYZ(double[], double[])}{15}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{15}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{15}%
+\contentsline {subsubsection}{update()}{15}%
+\contentsline {subsubsection}{translate(double[], double[])}{15}%
+\contentsline {subsubsection}{transform(GeoConstruct, double[], double[])}{15}%
+\contentsline {subsubsection}{getScale()}{15}%
+\contentsline {subsubsection}{setScale(double)}{15}%
+\contentsline {subsubsection}{resetScale()}{15}%
+\contentsline {chapter}{\numberline {3}Utility Classes}{16}%
+\contentsline {section}{\numberline {3.1}MathEqns}{16}%
+\contentsline {subsection}{\numberline {3.1.1}methods}{17}%
+\contentsline {subsubsection}{min(double, double)}{17}%
+\contentsline {subsubsection}{max(double, double)}{17}%
+\contentsline {subsubsection}{round(double)}{17}%
+\contentsline {subsubsection}{chop(double)}{17}%
+\contentsline {subsubsection}{chop(double, int)}{17}%
+\contentsline {subsubsection}{norm(double[])}{17}%
+\contentsline {subsubsection}{norm(double[], double[])}{17}%
+\contentsline {subsubsection}{crossProduct(double[], double[], double[])}{17}%
+\contentsline {subsubsection}{hypCrossProduct(double[], double[], double[])}{17}%
+\contentsline {subsubsection}{normalize(double[])}{17}%
+\contentsline {subsubsection}{hypNormalize(double[])}{17}%
+\contentsline {subsubsection}{scalarProduct(double, double[])}{17}%
+\contentsline {subsubsection}{addVec(double[], double[])}{17}%
+\contentsline {subsubsection}{subVec(double[], double[])}{17}%
+\contentsline {subsubsection}{dotProduct(double[], double[])}{17}%
+\contentsline {subsubsection}{hypProduct(double[], double[])}{17}%
+\contentsline {subsubsection}{rotate(double, double, double, double, ProjectiveConstruct)}{17}%
+\contentsline {subsubsection}{rotate(double, double, double, double, SphericalConstruct)}{17}%
+\contentsline {subsubsection}{transform(GeoConstruct, ProjectiveConstruct, double[], double[])}{17}%
+\contentsline {subsubsection}{transform(GeoConstruct, SphericalConstruct, double[], double[])}{17}%
+\contentsline {subsubsection}{transform(GeoConstruct, ToroidalConstruct, double[], double[])}{17}%
+\contentsline {subsubsection}{transform(GeoConstruct, EuclideanConstruct, double[], double[])}{17}%
+\contentsline {subsubsection}{transform(GeoConstruct, HyperConstruct, double[], double[])}{17}%
+\contentsline {subsubsection}{hypPerp(double[], double[], double[])}{17}%
+\contentsline {subsubsection}{hypLineIntLine(double[], double[], double[])}{17}%
+\contentsline {subsubsection}{hypTranslate(double[], double[], double[])}{17}%
+\contentsline {subsubsection}{sphTranslate(double[], double[], double[])}{17}%
+\contentsline {subsubsection}{makeStandard(double[])}{17}%
+\contentsline {subsubsection}{acosh(double)}{17}%
+\contentsline {subsubsection}{eucAngle(double[], double[], double[])}{17}%
+\contentsline {subsubsection}{hypAngle(double[], double[], double[])}{17}%
+\contentsline {subsubsection}{sphAngle(double[], double[], double[])}{17}%
+\contentsline {section}{\numberline {3.2}CircleEqns}{17}%
+\contentsline {subsection}{\numberline {3.2.1}methods}{18}%
+\contentsline {subsubsection}{calculateCL(double[], double[], double[], double[], boolean)}{18}%
+\contentsline {subsubsection}{calculateCC0(double[], double[], double[], double[], double[], boolean)}{18}%
+\contentsline {subsubsection}{calculateCC1(double[], double[], double[], double[], double[], boolean)}{18}%
+\contentsline {subsubsection}{calculateHypCL(double[], double[], double[], double[], boolean)}{18}%
+\contentsline {subsubsection}{calculateHypCC(double[], double[], double[], double[], double[], boolean)}{18}%
+\contentsline {subsubsection}{calculateEucCL(double[], double[], double[], double[], double[], boolean)}{18}%
+\contentsline {subsubsection}{calculateEucCC(double[], double[], double[], double[], double[], boolean)}{18}%
+\contentsline {section}{\numberline {3.3}SaveLoad}{18}%
+\contentsline {subsection}{\numberline {3.3.1}methods}{18}%
+\contentsline {subsubsection}{save(LinkedList $<$GeoConstruct$>$, GeoCanvas)}{18}%
+\contentsline {subsubsection}{load(LinkedList $<$GeoConstruct$>$, GeoCanvas)}{18}%
+\contentsline {subsubsection}{processGeometry(String, String)}{18}%
+\contentsline {subsubsection}{processLine(String, LinkedList $<$GeoConstruct$>$ , GeoMetry)}{18}%
+\contentsline {subsubsection}{StringToType(String)}{18}%
+\contentsline {subsubsection}{TypeToString(int)}{18}%
+\contentsline {chapter}{\numberline {4}Derived Classes}{19}%
+\contentsline {section}{\numberline {4.1}EuclideanGeometry extends GeoMetry}{19}%
+\contentsline {subsection}{\numberline {4.1.1}declarations}{20}%
+\contentsline {subsubsection}{}{20}%
+\contentsline {subsection}{\numberline {4.1.2}methods}{20}%
+\contentsline {subsection}{\numberline {4.1.3}getCurvature()}{20}%
+\contentsline {subsubsection}{drawModel(Graphics, int)}{20}%
+\contentsline {subsubsection}{convertMousetoCoord(MouseEvent, int)}{20}%
+\contentsline {subsubsection}{mouseIsValid(double[])}{20}%
+\contentsline {subsubsection}{createPoint(int, LinkedList$<$GeoConstruct$>$, double[])}{20}%
+\contentsline {subsubsection}{createLine(int, LinkedList$<$GeoConstruct$>$)}{20}%
+\contentsline {subsubsection}{createCircle(GeoConstruct, GeoConstruct)}{20}%
+\contentsline {subsubsection}{createIntersections(GeoConstruct, GeoConstruct, LinkedList$<$GeoConstruct$>$)}{20}%
+\contentsline {subsubsection}{distance(GeoConstruct, GeoConstruct)}{20}%
+\contentsline {subsubsection}{angle(GeoConstruct, GeoConstruct)}{20}%
+\contentsline {subsubsection}{area(GeoConstruct, boolean)}{20}%
+\contentsline {subsubsection}{getScale()}{20}%
+\contentsline {subsubsection}{setScale(double)}{20}%
+\contentsline {subsubsection}{extension()}{20}%
+\contentsline {subsubsection}{getName()}{20}%
+\contentsline {subsubsection}{getFileFilter()}{20}%
+\contentsline {section}{\numberline {4.2}ToroidalGeometry extends GeoMetry}{20}%
+\contentsline {subsection}{\numberline {4.2.1}declarations}{21}%
+\contentsline {subsubsection}{}{21}%
+\contentsline {subsection}{\numberline {4.2.2}methods}{21}%
+\contentsline {subsubsection}{getCurvature()}{21}%
+\contentsline {subsubsection}{drawModel(Graphics, int)}{21}%
+\contentsline {subsubsection}{convertMousetoCoord(MouseEvent, int)}{21}%
+\contentsline {subsubsection}{mouseIsValid(double[])}{21}%
+\contentsline {subsubsection}{createPoint(int, LinkedList$<$GeoConstruct$>$, double[])}{21}%
+\contentsline {subsubsection}{createLine(int, LinkedList$<$GeoConstruct$>$)}{21}%
+\contentsline {subsubsection}{createCircle(GeoConstruct, GeoConstruct)}{21}%
+\contentsline {subsubsection}{createIntersections(GeoConstruct, GeoConstruct, LinkedList$<$GeoConstruct$>$)}{21}%
+\contentsline {subsubsection}{distance(GeoConstruct, GeoConstruct)}{21}%
+\contentsline {subsubsection}{angle(GeoConstruct, GeoConstruct)}{21}%
+\contentsline {subsubsection}{area(GeoConstruct, boolean)}{21}%
+\contentsline {subsubsection}{getScale()}{21}%
+\contentsline {subsubsection}{setScale(double)}{21}%
+\contentsline {subsubsection}{extension()}{21}%
+\contentsline {subsubsection}{getName()}{21}%
+\contentsline {subsubsection}{getFileFilter()}{21}%
+\contentsline {section}{\numberline {4.3}ProjectiveGeometry extends GeoMetry}{21}%
+\contentsline {subsection}{\numberline {4.3.1}declarations}{22}%
+\contentsline {subsubsection}{}{22}%
+\contentsline {subsection}{\numberline {4.3.2}methods}{22}%
+\contentsline {subsubsection}{getCurvature()}{22}%
+\contentsline {subsubsection}{drawModel(Graphics, int)}{22}%
+\contentsline {subsubsection}{convertMousetoCoord(MouseEvent, int)}{22}%
+\contentsline {subsubsection}{mouseIsValid(double[])}{22}%
+\contentsline {subsubsection}{createPoint(int, LinkedList$<$GeoConstruct$>$, double[])}{22}%
+\contentsline {subsubsection}{createLine(int, LinkedList$<$GeoConstruct$>$)}{22}%
+\contentsline {subsubsection}{createCircle(GeoConstruct, GeoConstruct)}{22}%
+\contentsline {subsubsection}{createIntersections(GeoConstruct, GeoConstruct, LinkedList$<$GeoConstruct$>$)}{22}%
+\contentsline {subsubsection}{distance(GeoConstruct, GeoConstruct)}{22}%
+\contentsline {subsubsection}{angle(GeoConstruct, GeoConstruct)}{22}%
+\contentsline {subsubsection}{area(GeoConstruct, boolean)}{22}%
+\contentsline {subsubsection}{getScale()}{22}%
+\contentsline {subsubsection}{setScale(double)}{22}%
+\contentsline {subsubsection}{extension()}{22}%
+\contentsline {subsubsection}{getName()}{22}%
+\contentsline {subsubsection}{getFileFilter()}{22}%
+\contentsline {subsubsection}{SphericalGeometry extends GeoMetry}{22}%
+\contentsline {subsubsection}{getCurvature()}{23}%
+\contentsline {subsubsection}{drawModel(Graphics, int)}{23}%
+\contentsline {subsubsection}{convertMousetoCoord(MouseEvent, int)}{23}%
+\contentsline {subsubsection}{mouseIsValid(double[])}{23}%
+\contentsline {subsubsection}{createPoint(int, LinkedList$<$GeoConstruct$>$, double[])}{23}%
+\contentsline {subsubsection}{createLine(int, LinkedList$<$GeoConstruct$>$)}{23}%
+\contentsline {subsubsection}{createCircle(GeoConstruct, GeoConstruct)}{23}%
+\contentsline {subsubsection}{createIntersections(GeoConstruct, GeoConstruct, LinkedList$<$GeoConstruct$>$)}{23}%
+\contentsline {subsubsection}{distance(GeoConstruct, GeoConstruct)}{23}%
+\contentsline {subsubsection}{angle(GeoConstruct, GeoConstruct)}{23}%
+\contentsline {subsubsection}{area(GeoConstruct, boolean)}{23}%
+\contentsline {subsubsection}{getScale()}{23}%
+\contentsline {subsubsection}{setScale(double)}{23}%
+\contentsline {subsubsection}{extension()}{23}%
+\contentsline {subsubsection}{getName()}{23}%
+\contentsline {subsubsection}{getFileFilter()}{23}%
+\contentsline {section}{\numberline {4.4}HyperbolicGeometry extends GeoMetry}{23}%
+\contentsline {subsection}{\numberline {4.4.1}declarations}{24}%
+\contentsline {subsubsection}{}{24}%
+\contentsline {subsection}{\numberline {4.4.2}methods}{24}%
+\contentsline {subsubsection}{getCurvature()}{24}%
+\contentsline {subsubsection}{drawModel(Graphics, int)}{24}%
+\contentsline {subsubsection}{convertMousetoCoord(MouseEvent, int)}{24}%
+\contentsline {subsubsection}{mouseIsValid(double[])}{24}%
+\contentsline {subsubsection}{createPoint(int, LinkedList$<$GeoConstruct$>$, double[])}{24}%
+\contentsline {subsubsection}{createLine(int, LinkedList$<$GeoConstruct$>$)}{24}%
+\contentsline {subsubsection}{createCircle(GeoConstruct, GeoConstruct)}{24}%
+\contentsline {subsubsection}{createIntersections(GeoConstruct, GeoConstruct, LinkedList$<$GeoConstruct$>$)}{24}%
+\contentsline {subsubsection}{dotProduct(double[], double[])}{24}%
+\contentsline {subsubsection}{acos(double)}{24}%
+\contentsline {subsubsection}{distance(GeoConstruct, GeoConstruct)}{24}%
+\contentsline {subsubsection}{angle(GeoConstruct, GeoConstruct)}{24}%
+\contentsline {subsubsection}{area(GeoConstruct, boolean)}{24}%
+\contentsline {subsubsection}{getScale()}{24}%
+\contentsline {subsubsection}{setScale(double)}{24}%
+\contentsline {subsubsection}{extension()}{24}%
+\contentsline {subsubsection}{getName()}{24}%
+\contentsline {subsubsection}{getFileFilter()}{24}%
+\contentsline {section}{\numberline {4.5}EuclideanConstruct extends GeoConstruct}{24}%
+\contentsline {subsection}{\numberline {4.5.1}declarations}{25}%
+\contentsline {subsubsection}{scale : double}{25}%
+\contentsline {subsubsection}{scaleLimit : int}{25}%
+\contentsline {subsection}{\numberline {4.5.2}methods}{25}%
+\contentsline {subsubsection}{EuclideanConstruct()}{25}%
+\contentsline {subsubsection}{EuclideanConstruct(int, double[])}{25}%
+\contentsline {subsubsection}{EuclideanConstruct(int, double[], double[])}{25}%
+\contentsline {subsubsection}{EuclideanConstruct(int, EuclideanConstruct, EuclideanConstruct)}{25}%
+\contentsline {subsubsection}{EuclideanConstruct(int, double[], EuclideanConstruct)}{25}%
+\contentsline {subsubsection}{EuclideanConstruct(int, LinkedList$<$GeoConstruct$>$)}{25}%
+\contentsline {subsubsection}{EuclideanConstruct(int, LinkedList$<$GeoConstruct$>$, double[])}{25}%
+\contentsline {subsubsection}{intersect(int, EuclideanConstruct)}{25}%
+\contentsline {subsubsection}{setXYZ(double[])}{25}%
+\contentsline {subsubsection}{setXYZ(double[], double[])}{25}%
+\contentsline {subsubsection}{setNewXYZ(double[])}{25}%
+\contentsline {subsubsection}{setNewXYZ(double[], double[])}{25}%
+\contentsline {subsubsection}{translate(double[], double[])}{25}%
+\contentsline {subsubsection}{getScale()}{25}%
+\contentsline {subsubsection}{setScale(double)}{25}%
+\contentsline {subsubsection}{resetScale()}{25}%
+\contentsline {subsubsection}{rescale(double[])}{25}%
+\contentsline {subsubsection}{unscale(double[])}{25}%
+\contentsline {subsubsection}{transform(GeoConstruct, double[], double[])}{25}%
+\contentsline {section}{\numberline {4.6}EuclideanPoint extends EuclideanConstruct}{25}%
+\contentsline {subsection}{\numberline {4.6.1}declarations}{26}%
+\contentsline {subsubsection}{}{26}%
+\contentsline {subsection}{\numberline {4.6.2}methods}{26}%
+\contentsline {subsubsection}{EuclideanPoint(int, double[])}{26}%
+\contentsline {subsubsection}{EuclideanPoint(int, double[], double[])}{26}%
+\contentsline {subsubsection}{EuclideanPoint(int, double[], EuclideanConstruct)}{26}%
+\contentsline {subsubsection}{EuclideanPoint(int, EuclideanConstruct, EuclideanConstruct)}{26}%
+\contentsline {subsubsection}{EuclideanPoint(int, LinkedList$<$GeoConstruct$>$, double[])}{26}%
+\contentsline {subsubsection}{intersect(int, EuclideanConstruct)}{26}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{26}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{26}%
+\contentsline {subsubsection}{update()}{26}%
+\contentsline {subsection}{\numberline {4.6.3}EuclideanLine extends EuclideanConstruct}{26}%
+\contentsline {subsection}{\numberline {4.6.4}declarations}{26}%
+\contentsline {subsubsection}{vec1 : double[]}{26}%
+\contentsline {subsubsection}{vec2 : double[]}{26}%
+\contentsline {subsubsection}{norm : double[]}{26}%
+\contentsline {subsubsection}{binorm : double[]}{26}%
+\contentsline {subsection}{\numberline {4.6.5}methods}{26}%
+\contentsline {subsubsection}{EuclideanLine(int, LinkedList$<$GeoConstruct$>$)}{26}%
+\contentsline {subsubsection}{intersect(int, EuclideanConstruct)}{26}%
+\contentsline {subsubsection}{intersect(int, EuclideanLine)}{26}%
+\contentsline {subsubsection}{intersect(int, EuclideanCircle)}{26}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{26}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{26}%
+\contentsline {subsubsection}{update()}{26}%
+\contentsline {section}{\numberline {4.7}EuclideanCircle extends EuclideanConstruct}{26}%
+\contentsline {subsection}{\numberline {4.7.1}declarations}{27}%
+\contentsline {subsubsection}{}{27}%
+\contentsline {subsection}{\numberline {4.7.2}methods}{27}%
+\contentsline {subsubsection}{EuclideanCircle(int, EuclideanConstruct, EuclideanConstruct)}{27}%
+\contentsline {subsubsection}{intersect(int, EuclideanConstruct)}{27}%
+\contentsline {subsubsection}{intersect(int, EuclideanLine)}{27}%
+\contentsline {subsubsection}{intersect(int, EuclideanCircle)}{27}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{27}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{27}%
+\contentsline {subsubsection}{update()}{27}%
+\contentsline {subsubsection}{getCLxyz(EuclideanPoint, EuclideanConstruct, int)}{27}%
+\contentsline {subsubsection}{getNewCLxyz(EuclideanPoint, EuclideanConstruct, int)}{27}%
+\contentsline {subsubsection}{getCCxyz(EuclideanPoint, EuclideanConstruct, int)}{27}%
+\contentsline {subsubsection}{getNewCCxyz(EuclideanPoint, EuclideanConstruct, int)}{27}%
+\contentsline {section}{\numberline {4.8}ToroidalConstruct extends GeoConstruct}{27}%
+\contentsline {subsection}{\numberline {4.8.1}declarations}{27}%
+\contentsline {subsubsection}{scale : double}{27}%
+\contentsline {subsubsection}{scaleLimit : int}{27}%
+\contentsline {subsection}{\numberline {4.8.2}methods}{27}%
+\contentsline {subsubsection}{ToroidalConstruct()}{27}%
+\contentsline {subsubsection}{ToroidalConstruct(int, double[])}{27}%
+\contentsline {subsubsection}{ToroidalConstruct(int, double[], double[])}{27}%
+\contentsline {subsubsection}{ToroidalConstruct(int, ToroidalConstruct, ToroidalConstruct)}{27}%
+\contentsline {subsubsection}{ToroidalConstruct(int, double[], ToroidalConstruct)}{27}%
+\contentsline {subsubsection}{ToroidalConstruct(int, LinkedList$<$GeoConstruct$>$)}{27}%
+\contentsline {subsubsection}{ToroidalConstruct(int, LinkedList$<$GeoConstruct$>$, double[])}{27}%
+\contentsline {subsubsection}{intersect(int, ToroidalConstruct)}{27}%
+\contentsline {subsubsection}{setXYZ(double[])}{27}%
+\contentsline {subsubsection}{setXYZ(double[], double[])}{27}%
+\contentsline {subsubsection}{setNewXYZ(double[])}{27}%
+\contentsline {subsubsection}{setNewXYZ(double[], double[])}{27}%
+\contentsline {subsubsection}{translate(double[], double[])}{27}%
+\contentsline {subsubsection}{getScale()}{27}%
+\contentsline {subsubsection}{setScale(double)}{27}%
+\contentsline {subsubsection}{resetScale()}{27}%
+\contentsline {subsubsection}{rescale(double[])}{27}%
+\contentsline {subsubsection}{unscale(double[])}{27}%
+\contentsline {subsubsection}{transform(GeoConstruct, double[], double[])}{27}%
+\contentsline {section}{\numberline {4.9}ToroidalPoint extends ToroidalConstruct}{27}%
+\contentsline {subsection}{\numberline {4.9.1}declarations}{28}%
+\contentsline {subsubsection}{}{28}%
+\contentsline {subsection}{\numberline {4.9.2}methods}{28}%
+\contentsline {subsubsection}{ToroidalPoint(int, double[])}{28}%
+\contentsline {subsubsection}{ToroidalPoint(int, double[], double[])}{28}%
+\contentsline {subsubsection}{ToroidalPoint(int, double[], ToroidalConstruct)}{28}%
+\contentsline {subsubsection}{ToroidalPoint(int, ToroidalConstruct, ToroidalConstruct)}{28}%
+\contentsline {subsubsection}{ToroidalPoint(int, LinkedList$<$GeoConstruct$>$, double[])}{28}%
+\contentsline {subsubsection}{intersect(int, ToroidalConstruct)}{28}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{28}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{28}%
+\contentsline {subsubsection}{update()}{28}%
+\contentsline {section}{\numberline {4.10}ToroidalLine extends ToroidalConstruct}{28}%
+\contentsline {subsection}{\numberline {4.10.1}declarations}{28}%
+\contentsline {subsubsection}{vec1 : double[]}{28}%
+\contentsline {subsubsection}{vec2 : double[]}{28}%
+\contentsline {subsubsection}{norm : double[]}{28}%
+\contentsline {subsubsection}{binorm : double[]}{28}%
+\contentsline {subsection}{\numberline {4.10.2}methods}{28}%
+\contentsline {subsubsection}{ToroidalLine(int, LinkedList$<$GeoConstruct$>$)}{28}%
+\contentsline {subsubsection}{intersect(int, ToroidalConstruct)}{28}%
+\contentsline {subsubsection}{intersect(int, ToroidalLine)}{28}%
+\contentsline {subsubsection}{intersect(int, ToroidalCircle)}{28}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{28}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{28}%
+\contentsline {subsubsection}{update()}{28}%
+\contentsline {section}{\numberline {4.11}ToroidalCircle extends ToroidalConstruct}{28}%
+\contentsline {subsubsection}{declarations}{29}%
+\contentsline {subsubsection}{}{29}%
+\contentsline {subsection}{\numberline {4.11.1}methods}{29}%
+\contentsline {subsubsection}{ToroidalCircle(int, ToroidalConstruct, ToroidalConstruct)}{29}%
+\contentsline {subsubsection}{intersect(int, ToroidalConstruct)}{29}%
+\contentsline {subsubsection}{intersect(int, ToroidalLine)}{29}%
+\contentsline {subsubsection}{intersect(int, ToroidalCircle)}{29}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{29}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{29}%
+\contentsline {subsubsection}{update()}{29}%
+\contentsline {subsubsection}{getCLxyz(ToroidalPoint, ToroidalConstruct, int)}{29}%
+\contentsline {subsubsection}{getNewCLxyz(ToroidalPoint, ToroidalConstruct, int)}{29}%
+\contentsline {subsubsection}{getCCxyz(ToroidalPoint, ToroidalConstruct, int)}{29}%
+\contentsline {subsubsection}{getNewCCxyz(ToroidalPoint, ToroidalConstruct, int)}{29}%
+\contentsline {section}{\numberline {4.12}SphericalConstruct extends GeoConstruct}{29}%
+\contentsline {subsection}{\numberline {4.12.1}declarations}{30}%
+\contentsline {subsubsection}{}{30}%
+\contentsline {subsection}{\numberline {4.12.2}methods}{30}%
+\contentsline {subsubsection}{SphericalConstruct()}{30}%
+\contentsline {subsubsection}{SphericalConstruct(int, double[])}{30}%
+\contentsline {subsubsection}{SphericalConstruct(int, double[], double[])}{30}%
+\contentsline {subsubsection}{SphericalConstruct(int, SphericalConstruct, SphericalConstruct)}{30}%
+\contentsline {subsubsection}{SphericalConstruct(int, double[], SphericalConstruct)}{30}%
+\contentsline {subsubsection}{SphericalConstruct(int, LinkedList$<$GeoConstruct$>$)}{30}%
+\contentsline {subsubsection}{SphericalConstruct(int, LinkedList$<$GeoConstruct$>$, double[])}{30}%
+\contentsline {subsubsection}{intersect(int, SphericalConstruct)}{30}%
+\contentsline {subsubsection}{setXYZ(double[])}{30}%
+\contentsline {subsubsection}{setXYZ(double[], double[])}{30}%
+\contentsline {subsubsection}{setNewXYZ(double[])}{30}%
+\contentsline {subsubsection}{setNewXYZ(double[], double[])}{30}%
+\contentsline {subsubsection}{translate(double[], double[])}{30}%
+\contentsline {subsubsection}{transform(GeoConstruct, double[], double[])}{30}%
+\contentsline {section}{\numberline {4.13}SphericalPoint extends SphericalConstruct}{30}%
+\contentsline {subsection}{\numberline {4.13.1}declarations}{31}%
+\contentsline {subsubsection}{}{31}%
+\contentsline {subsection}{\numberline {4.13.2}methods}{31}%
+\contentsline {subsubsection}{SphericalPoint(int, double[])}{31}%
+\contentsline {subsubsection}{SphericalPoint(int, double[], double[])}{31}%
+\contentsline {subsubsection}{SphericalPoint(int, double[], SphericalConstruct)}{31}%
+\contentsline {subsubsection}{SphericalPoint(int, SphericalConstruct, SphericalConstruct)}{31}%
+\contentsline {subsubsection}{SphericalPoint(int, LinkedList$<$GeoConstruct$>$, double[])}{31}%
+\contentsline {subsubsection}{intersect(int, SphericalConstruct)}{31}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{31}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{31}%
+\contentsline {subsubsection}{update()}{31}%
+\contentsline {section}{\numberline {4.14}SphericalLine extends SphericalConstruct}{31}%
+\contentsline {subsection}{\numberline {4.14.1}declarations}{31}%
+\contentsline {subsubsection}{vec1 : double[]}{31}%
+\contentsline {subsubsection}{vec2 : double[]}{31}%
+\contentsline {subsubsection}{norm : double[]}{31}%
+\contentsline {subsubsection}{binorm : double[]}{31}%
+\contentsline {subsection}{\numberline {4.14.2}methods}{31}%
+\contentsline {subsubsection}{SphericalLine(int, LinkedList$<$GeoConstruct$>$)}{31}%
+\contentsline {subsubsection}{intersect(int, SphericalConstruct)}{31}%
+\contentsline {subsubsection}{intersect(int, SphericalLine)}{31}%
+\contentsline {subsubsection}{intersect(int, SphericalCircle)}{31}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{31}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{31}%
+\contentsline {subsubsection}{update()}{31}%
+\contentsline {section}{\numberline {4.15}SphericalCircle extends SphericalConstruct}{31}%
+\contentsline {subsection}{\numberline {4.15.1}declarations}{32}%
+\contentsline {subsubsection}{vec1 : double[]}{32}%
+\contentsline {subsubsection}{vec2 : double[]}{32}%
+\contentsline {subsubsection}{norm : double[]}{32}%
+\contentsline {subsubsection}{binorm : double[]}{32}%
+\contentsline {subsection}{\numberline {4.15.2}methods}{32}%
+\contentsline {subsubsection}{SphericalCircle(int, SphericalConstruct, SphericalConstruct)}{32}%
+\contentsline {subsubsection}{intersect(int, SphericalConstruct)}{32}%
+\contentsline {subsubsection}{intersect(int, SphericalLine)}{32}%
+\contentsline {subsubsection}{intersect(int, SphericalCircle)}{32}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{32}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{32}%
+\contentsline {subsubsection}{update()}{32}%
+\contentsline {subsubsection}{getCLxyz(SphericalPoint, SphericalConstruct, int)}{32}%
+\contentsline {subsubsection}{getNewCLxyz(SphericalPoint, SphericalConstruct, int)}{32}%
+\contentsline {subsubsection}{getCCxyz(SphericalPoint, SphericalConstruct, int)}{32}%
+\contentsline {subsubsection}{getNewCCxyz(SphericalPoint, SphericalConstruct, int)}{32}%
+\contentsline {section}{\numberline {4.16}ProjectiveConstruct extends GeoConstruct}{32}%
+\contentsline {subsection}{\numberline {4.16.1}declarations}{33}%
+\contentsline {subsubsection}{}{33}%
+\contentsline {subsection}{\numberline {4.16.2}methods}{33}%
+\contentsline {subsubsection}{ProjectiveConstruct()}{33}%
+\contentsline {subsubsection}{ProjectiveConstruct(int, double[])}{33}%
+\contentsline {subsubsection}{ProjectiveConstruct(int, double[], double[])}{33}%
+\contentsline {subsubsection}{ProjectiveConstruct(int, ProjectiveConstruct, ProjectiveConstruct)}{33}%
+\contentsline {subsubsection}{ProjectiveConstruct(int, double[], ProjectiveConstruct)}{33}%
+\contentsline {subsubsection}{ProjectiveConstruct(int, LinkedList$<$GeoConstruct$>$)}{33}%
+\contentsline {subsubsection}{ProjectiveConstruct(int, LinkedList$<$GeoConstruct$>$, double[])}{33}%
+\contentsline {subsubsection}{intersect(int, ProjectiveConstruct)}{33}%
+\contentsline {subsubsection}{setXYZ(double[])}{33}%
+\contentsline {subsubsection}{setXYZ(double[], double[])}{33}%
+\contentsline {subsubsection}{setNewXYZ(double[])}{33}%
+\contentsline {subsubsection}{setNewXYZ(double[], double[])}{33}%
+\contentsline {subsubsection}{translate(double[], double[])}{33}%
+\contentsline {subsubsection}{transform(GeoConstruct, double[], double[])}{33}%
+\contentsline {section}{\numberline {4.17}ProjectivePoint extends ProjectiveConstruct}{33}%
+\contentsline {subsection}{\numberline {4.17.1}declarations}{34}%
+\contentsline {subsubsection}{}{34}%
+\contentsline {subsection}{\numberline {4.17.2}methods}{34}%
+\contentsline {subsubsection}{ProjectivePoint(int, double[])}{34}%
+\contentsline {subsubsection}{ProjectivePoint(int, double[], double[])}{34}%
+\contentsline {subsubsection}{ProjectivePoint(int, double[], ProjectiveConstruct)}{34}%
+\contentsline {subsubsection}{ProjectivePoint(int, ProjectiveConstruct, ProjectiveConstruct)}{34}%
+\contentsline {subsubsection}{ProjectivePoint(int, LinkedList$<$GeoConstruct$>$, double[])}{34}%
+\contentsline {subsubsection}{intersect(int, GeoConstruct)}{34}%
+\contentsline {subsubsection}{intersect(int, ProjectiveConstruct)}{34}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{34}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{34}%
+\contentsline {subsubsection}{update()}{34}%
+\contentsline {section}{\numberline {4.18}ProjectiveLine extends ProjectiveConstruct}{34}%
+\contentsline {subsection}{\numberline {4.18.1}declarations}{34}%
+\contentsline {subsubsection}{vec1 : double[]}{34}%
+\contentsline {subsubsection}{vec2 : double[]}{34}%
+\contentsline {subsubsection}{norm : double[]}{34}%
+\contentsline {subsubsection}{binorm : double[]}{34}%
+\contentsline {subsection}{\numberline {4.18.2}methods}{34}%
+\contentsline {subsubsection}{ProjectiveLine(int, LinkedList$<$GeoConstruct$>$)}{34}%
+\contentsline {subsubsection}{intersect(int, ProjectiveConstruct)}{34}%
+\contentsline {subsubsection}{intersect(int, ProjectiveLine)}{34}%
+\contentsline {subsubsection}{intersect(int, ProjectiveCircle)}{34}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{34}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{34}%
+\contentsline {subsubsection}{update()}{34}%
+\contentsline {section}{\numberline {4.19}ProjectiveCircle extends ProjectiveConstruct}{34}%
+\contentsline {subsection}{\numberline {4.19.1}declarations}{35}%
+\contentsline {subsubsection}{vec1 : double[]}{35}%
+\contentsline {subsubsection}{vec2 : double[]}{35}%
+\contentsline {subsubsection}{norm : double[]}{35}%
+\contentsline {subsubsection}{binorm : double[]}{35}%
+\contentsline {subsection}{\numberline {4.19.2}methods}{35}%
+\contentsline {subsubsection}{ProjectiveCircle(int, ProjectiveConstruct, ProjectiveConstruct)}{35}%
+\contentsline {subsubsection}{intersect(int, ProjectiveConstruct)}{35}%
+\contentsline {subsubsection}{intersect(int, ProjectiveLine)}{35}%
+\contentsline {subsubsection}{intersect(int, ProjectiveCircle)}{35}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{35}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{35}%
+\contentsline {subsubsection}{update()}{35}%
+\contentsline {subsubsection}{getCLxyz(ProjectivePoint, ProjectiveConstruct, int)}{35}%
+\contentsline {subsubsection}{getNewCLxyz(ProjectivePoint, ProjectiveConstruct, int)}{35}%
+\contentsline {subsubsection}{getCCxyz(ProjectivePoint, ProjectiveConstruct, int)}{35}%
+\contentsline {subsubsection}{getNewCCxyz(ProjectivePoint, ProjectiveConstruct, int)}{35}%
+\contentsline {section}{\numberline {4.20}HyperConstruct extends GeoConstruct}{35}%
+\contentsline {subsection}{\numberline {4.20.1}declarations}{36}%
+\contentsline {subsubsection}{scale : double}{36}%
+\contentsline {subsubsection}{scaleLimit : int}{36}%
+\contentsline {subsection}{\numberline {4.20.2}methods}{36}%
+\contentsline {subsubsection}{HyperConstruct()}{36}%
+\contentsline {subsubsection}{HyperConstruct(int, double[])}{36}%
+\contentsline {subsubsection}{HyperConstruct(int, double[], double[])}{36}%
+\contentsline {subsubsection}{HyperConstruct(int, HyperConstruct, HyperConstruct)}{36}%
+\contentsline {subsubsection}{HyperConstruct(int, double[], HyperConstruct)}{36}%
+\contentsline {subsubsection}{HyperConstruct(int, LinkedList$<$GeoConstruct$>$)}{36}%
+\contentsline {subsubsection}{HyperConstruct(int, LinkedList$<$GeoConstruct$>$, double[])}{36}%
+\contentsline {subsubsection}{intersect(int, HyperConstruct)}{36}%
+\contentsline {subsubsection}{setXYZ(double[])}{36}%
+\contentsline {subsubsection}{setXYZ(double[], double[])}{36}%
+\contentsline {subsubsection}{setNewXYZ(double[])}{36}%
+\contentsline {subsubsection}{setNewXYZ(double[], double[])}{36}%
+\contentsline {subsubsection}{translate(double[], double[])}{36}%
+\contentsline {subsubsection}{getScale()}{36}%
+\contentsline {subsubsection}{setScale(double)}{36}%
+\contentsline {subsubsection}{resetScale()}{36}%
+\contentsline {subsubsection}{rescale(double[])}{36}%
+\contentsline {subsubsection}{unscale(double[])}{36}%
+\contentsline {subsubsection}{transform(GeoConstruct, double[], double[])}{36}%
+\contentsline {section}{\numberline {4.21}HyperPoint extends HyperConstruct}{36}%
+\contentsline {subsection}{\numberline {4.21.1}declarations}{37}%
+\contentsline {subsubsection}{}{37}%
+\contentsline {subsection}{\numberline {4.21.2}methods}{37}%
+\contentsline {subsubsection}{HyperPoint(int, double[])}{37}%
+\contentsline {subsubsection}{HyperPoint(int, double[], double[])}{37}%
+\contentsline {subsubsection}{HyperPoint(int, double[], HyperConstruct)}{37}%
+\contentsline {subsubsection}{HyperPoint(int, HyperConstruct, HyperConstruct)}{37}%
+\contentsline {subsubsection}{HyperPoint(int, LinkedList$<$GeoConstruct$>$, double[])}{37}%
+\contentsline {subsubsection}{intersect(int, HyperConstruct)}{37}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{37}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{37}%
+\contentsline {subsubsection}{update()}{37}%
+\contentsline {section}{\numberline {4.22}HyperLine extends HyperConstruct}{37}%
+\contentsline {subsection}{\numberline {4.22.1}declarations}{37}%
+\contentsline {subsubsection}{vec1 : double[]}{37}%
+\contentsline {subsubsection}{u2 : double[]}{37}%
+\contentsline {subsubsection}{norm : double[]}{37}%
+\contentsline {subsubsection}{binorm : double[]}{37}%
+\contentsline {subsection}{\numberline {4.22.2}methods}{37}%
+\contentsline {subsubsection}{HyperLine(int, LinkedList$<$GeoConstruct$>$)}{37}%
+\contentsline {subsubsection}{intersect(int, HyperConstruct)}{37}%
+\contentsline {subsubsection}{intersect(int, HyperLine)}{37}%
+\contentsline {subsubsection}{intersect(int, HyperCircle)}{37}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{37}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{37}%
+\contentsline {subsubsection}{update()}{37}%
+\contentsline {section}{\numberline {4.23}HyperCircle extends HyperConstruct}{37}%
+\contentsline {subsection}{\numberline {4.23.1}declarations}{38}%
+\contentsline {subsubsection}{}{38}%
+\contentsline {subsection}{\numberline {4.23.2}methods}{38}%
+\contentsline {subsubsection}{HyperCircle(int, HyperConstruct, HyperConstruct)}{38}%
+\contentsline {subsubsection}{intersect(int, HyperConstruct)}{38}%
+\contentsline {subsubsection}{intersect(int, HyperLine)}{38}%
+\contentsline {subsubsection}{intersect(int, HyperCircle)}{38}%
+\contentsline {subsubsection}{draw(Graphics, int, boolean)}{38}%
+\contentsline {subsubsection}{mouseIsOver(double[], int)}{38}%
+\contentsline {subsubsection}{update()}{38}%
+\contentsline {subsubsection}{getCLxyz(HyperPoint, HyperConstruct, int)}{38}%
+\contentsline {subsubsection}{getNewCLxyz(HyperPoint, HyperConstruct, int)}{38}%
+\contentsline {subsubsection}{getCCxyz(HyperPoint, HyperConstruct, int)}{38}%
+\contentsline {subsubsection}{getNewCCxyz(HyperPoint, HyperConstruct, int)}{38}%
