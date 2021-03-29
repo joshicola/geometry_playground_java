@@ -6,7 +6,7 @@ Original Java version of Geometry Playground written by D. Heath and J. Jacobs
 
 </center>
 
-Geometry Playground is a free ruler and compass Java application for multiple geometries. (You will need [Java 1.50](http://java.sun.com/javase/downloads/index_jdk5.jsp) or greater to run it.) To download Geometry Playground, follow the link below. A file named Playground.jar will then appear in your download directory. You can run Geometry Playground by double-clicking this file.
+Geometry Playground is a free ruler and compass Java application for multiple geometries. (You will need [Java 1.50](https://www.oracle.com/java/technologies/javase-downloads.html) or greater to run it.) To download Geometry Playground, follow the link below. Locate the `Playground.jar` in the download directory. Double-clicking the Playground.jar file will run Geometry Playground if the file is both set to "executable" and associated with a Java Runtime Executable.
 
 <center><font size="+2"> 
 
@@ -30,8 +30,10 @@ Instructions for Geometry Playground are probably not needed, but here is the ge
 
 The command to "move stuff around" can be found in the **Manipulate** menu: **Transform** is the command.
 
-There are some **constructions** saved in a .zip file, including some traditional Euclidean constructions and their counterparts in other geometries. Follow this link to download those [constructions](http://www.plu.edu/~heathdj/java/geom/Playground/Playground.zip).
+There are some [**constructions**](Constructions) of some traditional Euclidean constructions and their counterparts in other geometries. These [**constructions**](Constructions) are integrated into this repository.
+
+For contributing improvements to Geometry Playground or additional [**constructions**](Constructions), please submit a pull request.  
 
 <center><font size="-2">
-Last updated 2014/06/24.
+Last updated 2021/03/28.
 </font></center>
