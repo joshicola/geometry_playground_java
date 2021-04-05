@@ -1,0 +1,12 @@
+Geometry:Manhattan
+!KEY:ID;Type;<x;y;z>;{parent-1;parent-2;...};isShown;hasLabel;isReal;displayString
+0;POINT;<0.020000000000000018;-0.13;0.0>;{};true;false;true;
+1;POINT;<0.41333333333333333;-0.22999999999999998;0.0>;{};false;false;true;
+2;CIRCLE;<0.0;0.0;0.0>;{0;1};true;false;true;
+3;PTonCIRC;<0.4389417989417989;-0.20439153439153437;0.0>;{2};true;false;true;
+4;SEGMENT;<0.4189417989417989;-0.07439153439153437;0.0>;{0;3};true;false;true;
+5;PERP;<0.07439153439153437;0.4189417989417989;0.0>;{4;0};false;false;true;
+6;CIRCintLINE0;<-0.054391534391534366;-0.548941798941799;0.0>;{2;5};true;false;true;
+7;CIRCintLINE1;<0.0943915343915344;0.2889417989417989;0.0>;{2;5};false;false;true;
+8;SEGMENT;<-0.07439153439153438;-0.41894179894179895;0.0>;{0;6};true;false;true;
+9;SEGMENT;<-0.4933333333333333;-0.3445502645502646;0.0>;{3;6};true;false;true;

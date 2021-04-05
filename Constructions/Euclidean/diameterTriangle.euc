@@ -1,0 +1,15 @@
+Geometry:Euclidean
+!KEY:ID,Type,<x,y,z>,{parent-A,parent-B,isShown,hasLabel,isReal
+0,POINT,<-0.2916666666666667,0.0,0.0>,{},true,false,true
+1,POINT,<0.6791666666666667,0.0,0.0>,{},true,false,true
+2,CIRCLE,<-0.004166666666666667,-0.2875,0.0>,{0,1},false,false,true
+3,CIRCLE,<-0.008333333333333333,0.675,0.0>,{1,0},false,false,true
+4,CIRCintCIRC00,<0.19375,-0.8407663295073927,0.0>,{2,3},false,false,true
+5,CIRCintCIRC01,<0.19375,0.8407663295073927,0.0>,{2,3},false,false,true
+6,SEGMENT,<0.9708333333333334,0.0,0.0>,{0,1},true,false,true
+7,SEGMENT,<0.0,1.6815326590147854,0.0>,{4,5},false,false,true
+8,LINEintLINE0,<0.19374999999999998,0.0,0.0>,{7,6},false,false,true
+9,CIRCLE,<-0.00625,0.19375000000000003,0.0>,{8,1},true,false,true
+10,PTonCIRC,<0.40768886703164664,0.43572870166078487,0.0>,{9},true,false,true
+11,SEGMENT,<-0.27147779963502006,0.43572870166078487,0.0>,{1,10},true,false,true
+12,SEGMENT,<0.6993555336983133,0.43572870166078487,0.0>,{0,10},true,false,true

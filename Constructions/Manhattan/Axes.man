@@ -1,0 +1,7 @@
+Geometry:Manhattan
+!KEY:ID;Type;<x;y;z>;{parent-1;parent-2;...};isShown;hasLabel;isReal;displayString
+0;FIXedPT;<0.0;0.0;0.0>;{};true;false;true;
+1;FIXedPT;<1.0;0.0;0.0>;{};false;false;true;
+2;FIXedPT;<0.0;1.0;0.0>;{};false;false;true;
+3;LINE;<24.49223327187974;0.0;0.0>;{0;1};true;false;true;
+4;LINE;<0.0;1.0;0.0>;{0;2};true;false;true;

@@ -1,0 +1,9 @@
+Geometry:Manhattan
+!KEY:ID;Type;<x;y;z>;{parent-1;parent-2;...};isShown;hasLabel;isReal;displayString
+0;POINT;<-0.08666666666666667;0.02;0.0>;{};true;true;true;C
+1;POINT;<0.25333333333333335;-0.12666666666666668;0.0>;{};true;true;true;B
+2;SEGMENT;<-0.34;0.14666666666666667;0.0>;{0;1};true;false;true;a
+3;PERP;<-0.14666666666666667;-0.34;0.0>;{2;0};false;false;true;
+4;PTonLINE;<-0.18341437061048071;-0.20427876823338714;0.0>;{3};true;true;true;A
+5;SEGMENT;<0.0967477039438141;0.2242787682333872;0.0>;{0;4};true;false;true;b
+6;SEGMENT;<0.43674770394381407;0.07761210156672047;0.0>;{1;4};true;false;true;c

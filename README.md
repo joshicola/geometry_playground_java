@@ -1,2 +1,40 @@
 # geometry_playground_java
 Original Java version of Geometry Playground written by D. Heath and J. Jacobs
+
+<center>
+
+# Geometry Playground v 1.5
+
+</center>
+
+Geometry Playground is a free ruler and compass Java application for multiple geometries. (You will need [Java 1.50](https://www.oracle.com/java/technologies/javase-downloads.html) or greater to run it.) To download Geometry Playground, follow the link below. Locate the `Playground.jar` in the download directory. Double-clicking the Playground.jar file will run Geometry Playground if the file is both set to "executable" and associated with a Java Runtime Executable.
+
+<center><font size="+2"> 
+
+[Geometry Playground](Playground.jar)<br>
+[幾何学プレイグランド](Playground.jar)<br>
+[Parque Geométrico](Playground.jar)<br>
+[भूमिती अंगण](Playground.jar)<br>
+[La Géométrie, une aire de jeux](Playground.jar)<br>
+[الهندسة، مساحة ألعاب](Playground.jar)<br>
+[기하 놀이마당](Playground.jar)<br>
+[Геометрическая Игравая Плошадка](Playground.jar)<br>
+[Geometria Játszótér](Playground.jar)<br>
+[几何园地](Playground.jar)
+</font></center>
+
+Instructions for Geometry Playground are probably not needed, but here is the general idea:
+
+1.  Choose a geometry by selecting a tab.
+2.  Using the menus, choose what you want to do. You probably want to begin with the **Construct** menu.
+3.  Once you have chosen what you want to do, instructions for how to accomplish that should appear at the bottom of the screen.
+
+The command to "move stuff around" can be found in the **Manipulate** menu: **Transform** is the command.
+
+There are some [**constructions**](Constructions) of some traditional Euclidean constructions and their counterparts in other geometries. These [**constructions**](Constructions) are integrated into this repository.
+
+For contributing improvements to Geometry Playground or additional [**constructions**](Constructions), please submit a pull request.  
+
+<center><font size="-2">
+Last updated 2021/03/28.
+</font></center>
