@@ -4,16 +4,16 @@ Geometry Playground is a free ruler and compass Java application for multiple ge
 
 <center><font size="+2"> 
 
-[Geometry Playground](Playground.jar)<br>
-[幾何学プレイグランド](Playground.jar)<br>
-[Parque Geométrico](Playground.jar)<br>
-[भूमिती अंगण](Playground.jar)<br>
-[La Géométrie, une aire de jeux](Playground.jar)<br>
-[الهندسة، مساحة ألعاب](Playground.jar)<br>
-[기하 놀이마당](Playground.jar)<br>
-[Геометрическая Игравая Плошадка](Playground.jar)<br>
-[Geometria Játszótér](Playground.jar)<br>
-[几何园地](Playground.jar)
+[Geometry Playground](https://github.com/joshicola/geometry_playground_java/releases/latest/download/Playground.jar)<br>
+[幾何学プレイグランド](https://github.com/joshicola/geometry_playground_java/releases/latest/download/Playground.jar)<br>
+[Parque Geométrico](https://github.com/joshicola/geometry_playground_java/releases/latest/download/Playground.jar)<br>
+[भूमिती अंगण](https://github.com/joshicola/geometry_playground_java/releases/latest/download/Playground.jar)<br>
+[La Géométrie, une aire de jeux](https://github.com/joshicola/geometry_playground_java/releases/latest/download/Playground.jar)<br>
+[الهندسة، مساحة ألعاب](https://github.com/joshicola/geometry_playground_java/releases/latest/download/Playground.jar)<br>
+[기하 놀이마당](https://github.com/joshicola/geometry_playground_java/releases/latest/download/Playground.jar)<br>
+[Геометрическая Игравая Плошадка](https://github.com/joshicola/geometry_playground_java/releases/latest/download/Playground.jar)<br>
+[Geometria Játszótér](https://github.com/joshicola/geometry_playground_java/releases/latest/download/Playground.jar)<br>
+[几何园地](https://github.com/joshicola/geometry_playground_java/releases/latest/download/Playground.jar)
 </font></center>
 
 Instructions for Geometry Playground are probably not needed, but here is the general idea:
