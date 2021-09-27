@@ -1,6 +1,6 @@
 # Geometry Playground
 
-Geometry Playground is a free ruler and compass Java application for multiple geometries. (You will need [Java 1.50](https://www.oracle.com/java/technologies/javase-downloads.html) or greater to run it.) To download Geometry Playground, follow the link below. Locate the `Playground.jar` in the download directory. Double-clicking the Playground.jar file will run Geometry Playground if the file is both set to "executable" and associated with a Java Runtime Executable.
+Geometry Playground is a free ruler and compass Java application for multiple geometries. (You will need [Java 1.50](https://www.oracle.com/java/technologies/javase-downloads.html) or greater to run it.) To download Geometry Playground, follow the link below. Locate the `Playground.jar` in the download directory. Double-clicking the Playground.jar file will run Geometry Playground if the file is both set to "executable" and associated with a Java Runtime Executable. Alternatively, running the following command from a terminal prompt will do the same: `java -jar Playground.jar`.
 
 <center><font size="+2"> 
 
