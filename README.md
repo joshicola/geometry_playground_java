@@ -1,10 +1,10 @@
 # Geometry Playground
 Geometry Playground is a free ruler and compass Java application for multiple geometries.  
 
-Follow the [instructions](https://github.com/joshicola/geometry_playground_java/wiki/Instructions.md#installation) to download and launch Geometry Playground.
+Follow the [instructions](https://github.com/joshicola/geometry_playground_java/wiki/Instructions#-installation-and-launch) to download and launch Geometry Playground.
 
 ## Language Translations
-Geometry Playground has been translated into [10 Languages](https://github.com/joshicola/geometry_playground_java/wiki/Instructions.md#languages). To have it in your own language follow the [contributors guide](CONTRIBUTING.md) for changes to the `source/Messages.properties` file.
+Geometry Playground has been translated into [10 Languages](https://github.com/joshicola/geometry_playground_java/wiki/Instructions#languages). To have it in your own language follow the [contributors guide](CONTRIBUTING.md) for changes to the `source/Messages.properties` file.
 
 ## Basic Instructions for Use
 Barebones basic instructions for Geometry Playground are listed below:
@@ -15,7 +15,7 @@ Barebones basic instructions for Geometry Playground are listed below:
 
 The command to "move stuff around" can be found in the **Manipulate** menu: **Transform** is the command.
 
-More in-depth instructions can be found in the accompanying [wiki pages](https://github.com/joshicola/geometry_playground_java/wiki/Instructions.md#instructions).
+More in-depth instructions can be found in the accompanying [wiki pages](https://github.com/joshicola/geometry_playground_java/wiki/Instructions#instructions-for-use).
 
 ## Sample Constructions
 There are some [**constructions**](Constructions) of some traditional Euclidean constructions and their counterparts in other geometries. These [**constructions**](Constructions) are integrated into this repository.
