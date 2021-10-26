@@ -6,6 +6,7 @@ Follow the [instructions](https://github.com/joshicola/geometry_playground_java/
 ## Language Translations
 Geometry Playground has been translated into [10 Languages](https://github.com/joshicola/geometry_playground_java/wiki/Instructions#languages). To have it in your own language follow the [contributors guide](CONTRIBUTING.md) for changes to the `source/Messages.properties` file.
 
+
 ## Basic Instructions for Use
 Barebones basic instructions for Geometry Playground are listed below:
 
@@ -30,6 +31,11 @@ Heath, Daniel and Joshua Jacobs,“Geometry Playground”, Loci (September 2010)
 ## Credits
 The original Java version of Geometry Playground is written by [D. Heath](https://github.com/deejHeath) and [J. Jacobs](https://github.com/joshicola).
 
+Language translations have been performed by many individuals including:
+
+* Ajit Datar (Marathi)
+* Guillaume Lajoie (French)
+* Daniel J. Heath (Japanese)
 
 <center><font size="-2">
 Last updated 2021/03/28.
