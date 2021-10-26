@@ -1,7 +1,7 @@
 # Geometry Playground
 Geometry Playground is a free ruler and compass Java application for multiple geometries.  
 
-Follow the [instructions](https://github.com/joshicola/geometry_playground_java/wiki/Instructions#-installation-and-launch) to download and launch Geometry Playground.
+Follow the [instructions](https://github.com/joshicola/geometry_playground_java/wiki/Instructions#installation-and-launch) to download and launch Geometry Playground.
 
 ## Language Translations
 Geometry Playground has been translated into [10 Languages](https://github.com/joshicola/geometry_playground_java/wiki/Instructions#languages). To have it in your own language follow the [contributors guide](CONTRIBUTING.md) for changes to the `source/Messages.properties` file.
