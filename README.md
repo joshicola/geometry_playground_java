@@ -32,11 +32,35 @@ Heath, Daniel and Joshua Jacobs,“Geometry Playground”, Loci (September 2010)
 The original Java version of Geometry Playground is written by [D. Heath](https://github.com/deejHeath) and [J. Jacobs](https://github.com/joshicola).
 
 Language translations have been performed by many individuals including:
-
-* Ajit Datar (Marathi)
-* Guillaume Lajoie (French)
-* Daniel J. Heath (Japanese)
+* Arabic:
+  * Feryal Alayont
+  * Rachid Benkahlti
+* Chinese:
+  * Yachuan Yu
+  * Xioquian Zhang
+  * Qiang Zheng
+* French:
+  * Guillaume Lajoie
+* Hungarian:
+  * Laszlo Miklos Lovasz
+* Italian:
+  * Jeffrey Weeks
+* Japanese:
+  * Daniel J. Heath
+  * Yumiko Heath
+  * Hideto Tsutsui
+* Korean:
+  * Hyun-Jong Song
+  * Matthew Kim
+* Marathi:
+  * Ajit Datar
+* Russian:
+  * Natalya Manko
+  * Daniil Perebeynos
+* Spanish:
+  * Erlinda Cano
+  * Laura Matrajt
 
 <center><font size="-2">
-Last updated 2021/03/28.
+Last updated 2022/03/18.
 </font></center>
