@@ -26,7 +26,7 @@ For contributing improvements to Geometry Playground or additional [**constructi
 
 ## References
 Geometry Playground was featured in the Mathematical Association of America's Loci
-Heath, Daniel and Joshua Jacobs,“Geometry Playground”, Loci (September 2010), DOI: 10.4169/loci003567.
+Heath, Daniel and Joshua Jacobs,“Geometry Playground”, Loci (September 2010), DOI: [10.4169/loci003567](http://dx.doi.org/10.4169/loci003567).
 
 ## Credits
 The original Java version of Geometry Playground is written by [D. Heath](https://github.com/deejHeath) and [J. Jacobs](https://github.com/joshicola).
