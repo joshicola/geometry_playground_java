@@ -777,7 +777,7 @@ public class GeoPlayground extends JPanel implements ActionListener,ChangeListen
 			  }
     }
     if (e.getSource()==aboutMI) {
-    	BareBonesBrowserLaunch.openURL("https://students.washington.edu/josher/mediawiki/");
+    	BareBonesBrowserLaunch.openURL("https://github.com/joshicola/geometry_playground_java/wiki/Instructions");
     }
     for (int i=0;i<7;i++) if (e.getSource()==digitMI[i]) {
     	digitMI[digits-1].setText("");
